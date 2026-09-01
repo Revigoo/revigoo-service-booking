@@ -1723,16 +1723,13 @@ function generateRequestId() {
 
   const number =
     Math.floor(
-      100000 +
-      Math.random() *
-      900000
+      1 +
+      Math.random() * 999
     );
 
-
-  return `REV-REQ-${number}`;
+  return `REV-REQ-${String(number).padStart(3, "0")}`;
 
 }
-
 
 /* =========================================================
    COLLECT FORM DATA
