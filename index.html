@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
 
@@ -23,7 +24,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
+
 <body>
+
 
   <!-- =====================================================
        HEADER
@@ -32,12 +35,11 @@
   <header class="topbar">
 
     <a
-      href="#"
+      href="https://revigoo.in"
       class="brand"
       aria-label="REVIGOO Home"
     >
 
-      <!-- Text-only REVIGOO logo -->
       <div class="wordmark">
         <span>R</span>
         <span>E</span>
@@ -55,12 +57,14 @@
     </a>
 
 
-   <a
+    <!-- Email Support -->
+
+    <a
       class="support"
       href="mailto:admin1@revigoo.in"
     >
       Support
-  </a>
+    </a>
 
   </header>
 
@@ -72,924 +76,569 @@
 
   <main>
 
-    <!-- =================================================
-         HERO
-    ================================================== -->
 
-    <section class="hero">
+    <!-- ===================================================
+         BOOKING PAGE
+         Hero + Form
+    ==================================================== -->
 
-      <div class="hero-content">
-
-        <div class="hero-copy">
-
-          <div class="eyebrow">
-            <i></i>
-            Two-wheeler service made easy
-          </div>
-
-
-          <h1>
-            Book your bike
-            <br>
-            <strong>service in minutes.</strong>
-          </h1>
-
-
-          <p>
-            Tell us what your bike needs.
-            We'll handle the rest, including pickup coordination.
-          </p>
-
-
-          <div class="trust">
-
-            <span>
-              ✓ Easy booking
-            </span>
-
-            <span>
-              ✓ Pickup available
-            </span>
-
-            <span>
-              ✓ Trusted service
-            </span>
-
-          </div>
-
-        </div>
-  
-
-    </section>
-
-
-
-    <!-- =================================================
-         BOOKING AREA
-    ================================================== -->
-
-    <section
-      class="booking-shell"
-      id="booking"
-    >
+    <div id="bookingPage">
 
 
       <!-- ===============================================
-           PROGRESS
+           HERO
       ================================================ -->
 
-      <div class="progress-area">
+      <section class="hero">
 
-        <div class="progress-top">
-
-          <span id="stepLabel">
-            Step 1 of 5
-          </span>
-
-          <span id="stepTitle">
-            Customer
-          </span>
-
-        </div>
+        <div class="hero-content">
 
 
-        <div class="progress-track">
+          <!-- Hero Text -->
+
+          <div class="hero-copy">
+
+            <div class="eyebrow">
+
+              <i></i>
+
+              Two-wheeler service made easy
+
+            </div>
+
+
+            <h1>
+
+              Book your bike
+              <br>
+
+              <strong>
+                service in minutes.
+              </strong>
+
+            </h1>
+
+
+            <p>
+
+              Tell us what your bike needs.
+              We'll handle the rest, including pickup coordination.
+
+            </p>
+
+
+            <div class="trust">
+
+              <span>
+                ✓ Easy booking
+              </span>
+
+              <span>
+                ✓ Pickup available
+              </span>
+
+              <span>
+                ✓ Trusted service
+              </span>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- Hero REVIGOO Branding -->
 
           <div
-            id="progressFill"
-          ></div>
+            class="hero-brand"
+            aria-label="REVIGOO"
+          >
+
+            <div class="hero-wordmark">
+
+              <span>R</span>
+              <span>E</span>
+              <b>V</b>
+              <span>I</span>
+              <span>G</span>
+              <span>O</span>
+              <span>O</span>
+
+            </div>
+
+
+            <small>
+              BIKE SERVICE PLATFORM
+            </small>
+
+          </div>
 
         </div>
 
-
-        <div class="steps">
-
-          <button
-            type="button"
-            class="step active"
-            data-step="1"
-          >
-            1
-            <span>Customer</span>
-          </button>
-
-
-          <button
-            type="button"
-            class="step"
-            data-step="2"
-          >
-            2
-            <span>Bike</span>
-          </button>
-
-
-          <button
-            type="button"
-            class="step"
-            data-step="3"
-          >
-            3
-            <span>Service</span>
-          </button>
-
-
-          <button
-            type="button"
-            class="step"
-            data-step="4"
-          >
-            4
-            <span>Pickup</span>
-          </button>
-
-
-          <button
-            type="button"
-            class="step"
-            data-step="5"
-          >
-            5
-            <span>Confirm</span>
-          </button>
-
-        </div>
-
-      </div>
+      </section>
 
 
 
       <!-- ===============================================
-           FORM
+           BOOKING FORM
       ================================================ -->
 
-      <form
-        id="serviceForm"
-        novalidate
+      <section
+        class="booking-shell"
+        id="booking"
       >
 
 
         <!-- =============================================
-             STEP 1 — CUSTOMER
+             PROGRESS
         ============================================== -->
 
-        <section
-          class="step-panel active"
-          data-panel="1"
-        >
+        <div class="progress-area">
 
-          <div class="panel-head">
+          <div class="progress-top">
 
-            <div class="number">
-              01
-            </div>
-
-            <div>
-
-              <h2>
-                Let's get to know you
-              </h2>
-
-              <p>
-                We'll use these details to confirm your booking.
-              </p>
-
-            </div>
-
-          </div>
-
-
-          <div class="grid">
-
-
-            <!-- Full Name -->
-
-            <div class="field full">
-
-              <label for="customerName">
-
-                Full Name
-                <em>*</em>
-
-              </label>
-
-
-              <input
-                id="customerName"
-                name="customerName"
-                type="text"
-                placeholder="Enter your name"
-                autocomplete="name"
-              >
-
-
-              <small class="error"></small>
-
-            </div>
-
-
-
-            <!-- Mobile -->
-
-            <div class="field">
-
-              <label for="mobileNumber">
-
-                Mobile Number
-                <em>*</em>
-
-              </label>
-
-
-              <input
-                id="mobileNumber"
-                name="mobileNumber"
-                type="tel"
-                inputmode="numeric"
-                maxlength="10"
-                placeholder="10-digit mobile number"
-                autocomplete="tel"
-              >
-
-
-              <small class="error"></small>
-
-            </div>
-
-
-
-            <!-- WhatsApp -->
-
-            <div class="field">
-
-              <label for="whatsappNumber">
-
-                WhatsApp Number
-
-              </label>
-
-
-              <input
-                id="whatsappNumber"
-                name="whatsappNumber"
-                type="tel"
-                inputmode="numeric"
-                maxlength="10"
-                placeholder="If different from mobile"
-              >
-
-
-              <small class="error"></small>
-
-            </div>
-
-
-
-            <!-- Email -->
-
-            <div class="field full">
-
-              <label for="email">
-
-                Email Address
-
-                <span class="optional">
-                  Optional
-                </span>
-
-              </label>
-
-
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="you@example.com"
-                autocomplete="email"
-              >
-
-
-              <small class="error"></small>
-
-            </div>
-
-          </div>
-
-
-          <div class="tip">
-
-            <span>
-              💡
+            <span id="stepLabel">
+              Step 1 of 5
             </span>
 
-            <p>
-              We'll contact you on your mobile number
-              to confirm the service request.
-            </p>
-
-          </div>
-
-        </section>
-
-
-
-        <!-- =============================================
-             STEP 2 — BIKE
-        ============================================== -->
-
-        <section
-          class="step-panel"
-          data-panel="2"
-        >
-
-          <div class="panel-head">
-
-            <div class="number">
-              02
-            </div>
-
-            <div>
-
-              <h2>
-                Tell us about your bike
-              </h2>
-
-              <p>
-                This helps us prepare for the right service.
-              </p>
-
-            </div>
+            <span id="stepTitle">
+              Customer
+            </span>
 
           </div>
 
 
-          <div class="grid">
-
-
-            <!-- Registration -->
-
-            <div class="field full">
-
-              <label for="registrationNumber">
-
-                Registration Number
-                <em>*</em>
-
-              </label>
-
-
-              <input
-                id="registrationNumber"
-                name="registrationNumber"
-                type="text"
-                placeholder="KL 00 AB 1234"
-                autocomplete="off"
-              >
-
-
-              <small class="hint">
-                Example: KL 00 AB 1234
-              </small>
-
-
-              <small class="error"></small>
-
-            </div>
-
-
-
-            <!-- Brand -->
-
-            <div class="field">
-
-              <label for="bikeBrand">
-
-                Bike Brand
-                <em>*</em>
-
-              </label>
-
-
-              <input
-                id="bikeBrand"
-                name="bikeBrand"
-                type="text"
-                placeholder="e.g. Honda"
-              >
-
-
-              <small class="error"></small>
-
-            </div>
-
-
-
-            <!-- Model -->
-
-            <div class="field">
-
-              <label for="bikeModel">
-
-                Bike Model
-                <em>*</em>
-
-              </label>
-
-
-              <input
-                id="bikeModel"
-                name="bikeModel"
-                type="text"
-                placeholder="e.g. Activa 6G"
-              >
-
-
-              <small class="error"></small>
-
-            </div>
-
-
-
-            <!-- Manufacturing Year -->
-
-            <div class="field">
-
-              <label for="manufacturingYear">
-
-                Manufacturing Year
-
-              </label>
-
-
-              <input
-                id="manufacturingYear"
-                name="manufacturingYear"
-                type="number"
-                min="1950"
-                placeholder="e.g. 2022"
-                inputmode="numeric"
-              >
-
-
-              <small class="error"></small>
-
-            </div>
-
-
-
-            <!-- Odometer -->
-
-            <div class="field">
-
-              <label for="odometer">
-
-                Current Odometer
-
-                <span class="optional">
-                  Optional
-                </span>
-
-              </label>
-
-
-              <div class="unit-input">
-
-                <input
-                  id="odometer"
-                  name="odometer"
-                  type="number"
-                  min="0"
-                  placeholder="e.g. 24000"
-                  inputmode="numeric"
-                >
-
-                <span>
-                  km
-                </span>
-
-              </div>
-
-
-              <small class="error"></small>
-
-            </div>
-
-          </div>
-
-        </section>
-
-
-
-        <!-- =============================================
-             STEP 3 — SERVICE
-        ============================================== -->
-
-        <section
-          class="step-panel"
-          data-panel="3"
-        >
-
-          <div class="panel-head">
-
-            <div class="number">
-              03
-            </div>
-
-            <div>
-
-              <h2>
-                What does your bike need?
-              </h2>
-
-              <p>
-                Select one or more services.
-              </p>
-
-            </div>
+          <div class="progress-track">
+
+            <div
+              id="progressFill"
+            ></div>
 
           </div>
 
 
-
-          <!-- SERVICE CARDS -->
-
-          <div class="service-grid">
-
-
-            <label class="service-card">
-
-              <input
-                type="checkbox"
-                name="services"
-                value="General Service"
-              >
-
-              <span class="check">
-                ✓
-              </span>
-
-              <span class="icon">
-                🔧
-              </span>
-
-              <strong>
-                General Service
-              </strong>
-
-            </label>
-
-
-
-            <label class="service-card">
-
-              <input
-                type="checkbox"
-                name="services"
-                value="Full Service"
-              >
-
-              <span class="check">
-                ✓
-              </span>
-
-              <span class="icon">
-                🛠️
-              </span>
-
-              <strong>
-                Full Service
-              </strong>
-
-            </label>
-
-
-
-            <label class="service-card">
-
-              <input
-                type="checkbox"
-                name="services"
-                value="Engine Oil Change"
-              >
-
-              <span class="check">
-                ✓
-              </span>
-
-              <span class="icon">
-                🛢️
-              </span>
-
-              <strong>
-                Engine Oil
-              </strong>
-
-            </label>
-
-
-
-            <label class="service-card">
-
-              <input
-                type="checkbox"
-                name="services"
-                value="Brake Service"
-              >
-
-              <span class="check">
-                ✓
-              </span>
-
-              <span class="icon">
-                ⭕
-              </span>
-
-              <strong>
-                Brake Service
-              </strong>
-
-            </label>
-
-
-
-            <label class="service-card">
-
-              <input
-                type="checkbox"
-                name="services"
-                value="Battery Service"
-              >
-
-              <span class="check">
-                ✓
-              </span>
-
-              <span class="icon">
-                🔋
-              </span>
-
-              <strong>
-                Battery
-              </strong>
-
-            </label>
-
-
-
-            <label class="service-card">
-
-              <input
-                type="checkbox"
-                name="services"
-                value="Tyre Service"
-              >
-
-              <span class="check">
-                ✓
-              </span>
-
-              <span class="icon">
-                ⚫
-              </span>
-
-              <strong>
-                Tyre Service
-              </strong>
-
-            </label>
-
-
-
-            <label class="service-card">
-
-              <input
-                type="checkbox"
-                name="services"
-                value="Chain & Sprocket"
-              >
-
-              <span class="check">
-                ✓
-              </span>
-
-              <span class="icon">
-                ⚙️
-              </span>
-
-              <strong>
-                Chain & Sprocket
-              </strong>
-
-            </label>
-
-
-
-            <label class="service-card">
-
-              <input
-                type="checkbox"
-                name="services"
-                value="Bike Cleaning"
-              >
-
-              <span class="check">
-                ✓
-              </span>
-
-              <span class="icon">
-                ✨
-              </span>
-
-              <strong>
-                Bike Cleaning
-              </strong>
-
-            </label>
-
-
-
-            <label class="service-card">
-
-              <input
-                type="checkbox"
-                name="services"
-                value="Other"
-              >
-
-              <span class="check">
-                ✓
-              </span>
-
-              <span class="icon">
-                ＋
-              </span>
-
-              <strong>
-                Other
-              </strong>
-
-            </label>
-
-          </div>
-
-
-          <small
-            id="serviceError"
-            class="error"
-          ></small>
-
-
-
-          <!-- ISSUE -->
-
-          <div class="field issue-field">
-
-            <label for="issueDescription">
-
-              Anything else we should know?
-
-              <span class="optional">
-                Optional
-              </span>
-
-            </label>
-
-
-            <textarea
-              id="issueDescription"
-              name="issueDescription"
-              rows="4"
-              placeholder="Describe a problem, unusual sound, warning light or any additional requirement..."
-            ></textarea>
-
-          </div>
-
-
-
-          <!-- PHOTOS -->
-
-          <div class="photo-box">
-
-            <div>
-
-              <strong>
-                Add photos of your bike
-              </strong>
-
-              <p>
-                Optional • Up to 4 photos
-              </p>
-
-            </div>
-
-
-            <label
-              class="photo-button"
-              for="bikePhotos"
+          <div class="steps">
+
+            <button
+              type="button"
+              class="step active"
+              data-step="1"
             >
-              ＋ Add Photos
-            </label>
+              1
+              <span>
+                Customer
+              </span>
+            </button>
 
 
-            <input
-              id="bikePhotos"
-              type="file"
-              accept="image/*"
-              multiple
-              hidden
+            <button
+              type="button"
+              class="step"
+              data-step="2"
             >
+              2
+              <span>
+                Bike
+              </span>
+            </button>
+
+
+            <button
+              type="button"
+              class="step"
+              data-step="3"
+            >
+              3
+              <span>
+                Service
+              </span>
+            </button>
+
+
+            <button
+              type="button"
+              class="step"
+              data-step="4"
+            >
+              4
+              <span>
+                Pickup
+              </span>
+            </button>
+
+
+            <button
+              type="button"
+              class="step"
+              data-step="5"
+            >
+              5
+              <span>
+                Confirm
+              </span>
+            </button>
 
           </div>
 
-
-          <div
-            id="photoPreview"
-            class="photo-preview"
-          ></div>
-
-        </section>
+        </div>
 
 
 
         <!-- =============================================
-             STEP 4 — PICKUP
+             FORM
         ============================================== -->
 
-        <section
-          class="step-panel"
-          data-panel="4"
+        <form
+          id="serviceForm"
+          novalidate
         >
 
-          <div class="panel-head">
 
-            <div class="number">
-              04
-            </div>
+          <!-- ===========================================
+               STEP 1
+          ============================================ -->
 
-            <div>
+          <section
+            class="step-panel active"
+            data-panel="1"
+          >
 
-              <h2>
-                Where should we pick up your bike?
-              </h2>
+            <div class="panel-head">
 
-              <p>
-                A precise location helps us avoid pickup delays.
-              </p>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- ADDRESS -->
-
-          <div class="field">
-
-            <label for="pickupAddress">
-
-              Pickup Address
-              <em>*</em>
-
-            </label>
-
-
-            <textarea
-              id="pickupAddress"
-              name="pickupAddress"
-              rows="4"
-              placeholder="House / building, street, area, landmark, city..."
-            ></textarea>
-
-
-            <small class="error"></small>
-
-          </div>
-
-
-
-          <!-- LOCATION -->
-
-          <div class="location-box">
-
-
-            <div class="location-title">
-
-              <div class="pin">
-                ⌖
+              <div class="number">
+                01
               </div>
 
               <div>
 
-                <strong>
-
-                  Share your exact location
-                  <em>*</em>
-
-                </strong>
+                <h2>
+                  Let's get to know you
+                </h2>
 
                 <p>
-                  Recommended — fastest and most accurate.
+                  We'll use these details to confirm your booking.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="grid">
+
+
+              <!-- Name -->
+
+              <div class="field full">
+
+                <label for="customerName">
+                  Full Name
+                  <em>*</em>
+                </label>
+
+                <input
+                  id="customerName"
+                  name="customerName"
+                  type="text"
+                  placeholder="Enter your name"
+                  autocomplete="name"
+                >
+
+                <small class="error"></small>
+
+              </div>
+
+
+
+              <!-- Mobile -->
+
+              <div class="field">
+
+                <label for="mobileNumber">
+                  Mobile Number
+                  <em>*</em>
+                </label>
+
+                <input
+                  id="mobileNumber"
+                  name="mobileNumber"
+                  type="tel"
+                  inputmode="numeric"
+                  maxlength="10"
+                  placeholder="10-digit mobile number"
+                  autocomplete="tel"
+                >
+
+                <small class="error"></small>
+
+              </div>
+
+
+
+              <!-- WhatsApp -->
+
+              <div class="field">
+
+                <label for="whatsappNumber">
+
+                  WhatsApp Number
+
+                  <span class="optional">
+                    Optional
+                  </span>
+
+                </label>
+
+                <input
+                  id="whatsappNumber"
+                  name="whatsappNumber"
+                  type="tel"
+                  inputmode="numeric"
+                  maxlength="10"
+                  placeholder="10-digit WhatsApp number"
+                >
+
+                <small class="error"></small>
+
+              </div>
+
+
+
+              <!-- Email -->
+
+              <div class="field full">
+
+                <label for="email">
+
+                  Email Address
+
+                  <span class="optional">
+                    Optional
+                  </span>
+
+                </label>
+
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                >
+
+                <small class="error"></small>
+
+              </div>
+
+            </div>
+
+
+            <div class="tip">
+
+              <span>
+                💡
+              </span>
+
+              <p>
+                We'll contact you on your mobile number
+                to confirm the service request.
+              </p>
+
+            </div>
+
+          </section>
+
+
+
+          <!-- ===========================================
+               STEP 2
+          ============================================ -->
+
+          <section
+            class="step-panel"
+            data-panel="2"
+          >
+
+            <div class="panel-head">
+
+              <div class="number">
+                02
+              </div>
+
+              <div>
+
+                <h2>
+                  Tell us about your bike
+                </h2>
+
+                <p>
+                  This helps us prepare for the right service.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="grid">
+
+
+              <div class="field full">
+
+                <label for="registrationNumber">
+
+                  Registration Number
+                  <em>*</em>
+
+                </label>
+
+                <input
+                  id="registrationNumber"
+                  name="registrationNumber"
+                  type="text"
+                  placeholder="KL 00 AB 1234"
+                  autocomplete="off"
+                >
+
+                <small class="hint">
+                  Example: KL 00 AB 1234
+                </small>
+
+                <small class="error"></small>
+
+              </div>
+
+
+
+              <div class="field">
+
+                <label for="bikeBrand">
+
+                  Bike Brand
+                  <em>*</em>
+
+                </label>
+
+                <input
+                  id="bikeBrand"
+                  name="bikeBrand"
+                  type="text"
+                  placeholder="e.g. Honda"
+                >
+
+                <small class="error"></small>
+
+              </div>
+
+
+
+              <div class="field">
+
+                <label for="bikeModel">
+
+                  Bike Model
+                  <em>*</em>
+
+                </label>
+
+                <input
+                  id="bikeModel"
+                  name="bikeModel"
+                  type="text"
+                  placeholder="e.g. Activa 6G"
+                >
+
+                <small class="error"></small>
+
+              </div>
+
+
+
+              <div class="field">
+
+                <label for="manufacturingYear">
+
+                  Manufacturing Year
+
+                </label>
+
+                <input
+                  id="manufacturingYear"
+                  name="manufacturingYear"
+                  type="number"
+                  min="1950"
+                  placeholder="e.g. 2022"
+                  inputmode="numeric"
+                >
+
+                <small class="error"></small>
+
+              </div>
+
+
+
+              <div class="field">
+
+                <label for="odometer">
+
+                  Current Odometer
+
+                  <span class="optional">
+                    Optional
+                  </span>
+
+                </label>
+
+                <div class="unit-input">
+
+                  <input
+                    id="odometer"
+                    name="odometer"
+                    type="number"
+                    min="0"
+                    placeholder="e.g. 24000"
+                    inputmode="numeric"
+                  >
+
+                  <span>
+                    km
+                  </span>
+
+                </div>
+
+                <small class="error"></small>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+
+          <!-- ===========================================
+               STEP 3
+          ============================================ -->
+
+          <section
+            class="step-panel"
+            data-panel="3"
+          >
+
+            <div class="panel-head">
+
+              <div class="number">
+                03
+              </div>
+
+              <div>
+
+                <h2>
+                  What does your bike need?
+                </h2>
+
+                <p>
+                  Select one or more services.
                 </p>
 
               </div>
@@ -998,351 +647,731 @@
 
 
 
-            <!-- GPS -->
-
-            <button
-              type="button"
-              class="gps-button"
-              id="useCurrentLocation"
-            >
-
-              ◎
-              Use My Current Location
-
-            </button>
+            <div class="service-grid">
 
 
-            <div
-              id="locationStatus"
-              class="location-status"
-              aria-live="polite"
-            ></div>
+              <label class="service-card">
 
+                <input
+                  type="checkbox"
+                  name="services"
+                  value="General Service"
+                >
 
+                <span class="check">
+                  ✓
+                </span>
 
-            <!-- OR -->
+                <span class="icon">
+                  🔧
+                </span>
 
-            <div class="or">
-              <span>OR</span>
-            </div>
-
-
-
-            <!-- GOOGLE MAPS -->
-
-            <div class="field">
-
-              <label for="googleMapsLink">
-
-                Paste Google Maps Link
-                <em>*</em>
+                <strong>
+                  General Service
+                </strong>
 
               </label>
 
 
+
+              <label class="service-card">
+
+                <input
+                  type="checkbox"
+                  name="services"
+                  value="Full Service"
+                >
+
+                <span class="check">
+                  ✓
+                </span>
+
+                <span class="icon">
+                  🛠️
+                </span>
+
+                <strong>
+                  Full Service
+                </strong>
+
+              </label>
+
+
+
+              <label class="service-card">
+
+                <input
+                  type="checkbox"
+                  name="services"
+                  value="Engine Oil Change"
+                >
+
+                <span class="check">
+                  ✓
+                </span>
+
+                <span class="icon">
+                  🛢️
+                </span>
+
+                <strong>
+                  Engine Oil
+                </strong>
+
+              </label>
+
+
+
+              <label class="service-card">
+
+                <input
+                  type="checkbox"
+                  name="services"
+                  value="Brake Service"
+                >
+
+                <span class="check">
+                  ✓
+                </span>
+
+                <span class="icon">
+                  ⭕
+                </span>
+
+                <strong>
+                  Brake Service
+                </strong>
+
+              </label>
+
+
+
+              <label class="service-card">
+
+                <input
+                  type="checkbox"
+                  name="services"
+                  value="Battery Service"
+                >
+
+                <span class="check">
+                  ✓
+                </span>
+
+                <span class="icon">
+                  🔋
+                </span>
+
+                <strong>
+                  Battery
+                </strong>
+
+              </label>
+
+
+
+              <label class="service-card">
+
+                <input
+                  type="checkbox"
+                  name="services"
+                  value="Tyre Service"
+                >
+
+                <span class="check">
+                  ✓
+                </span>
+
+                <span class="icon">
+                  ⚫
+                </span>
+
+                <strong>
+                  Tyre Service
+                </strong>
+
+              </label>
+
+
+
+              <label class="service-card">
+
+                <input
+                  type="checkbox"
+                  name="services"
+                  value="Chain & Sprocket"
+                >
+
+                <span class="check">
+                  ✓
+                </span>
+
+                <span class="icon">
+                  ⚙️
+                </span>
+
+                <strong>
+                  Chain & Sprocket
+                </strong>
+
+              </label>
+
+
+
+              <label class="service-card">
+
+                <input
+                  type="checkbox"
+                  name="services"
+                  value="Bike Cleaning"
+                >
+
+                <span class="check">
+                  ✓
+                </span>
+
+                <span class="icon">
+                  ✨
+                </span>
+
+                <strong>
+                  Bike Cleaning
+                </strong>
+
+              </label>
+
+
+
+              <label class="service-card">
+
+                <input
+                  type="checkbox"
+                  name="services"
+                  value="Other"
+                >
+
+                <span class="check">
+                  ✓
+                </span>
+
+                <span class="icon">
+                  ＋
+                </span>
+
+                <strong>
+                  Other
+                </strong>
+
+              </label>
+
+            </div>
+
+
+            <small
+              id="serviceError"
+              class="error"
+            ></small>
+
+
+
+            <div class="field issue-field">
+
+              <label for="issueDescription">
+
+                Describe the issue / additional requirements
+
+                <span class="optional">
+                  Optional
+                </span>
+
+              </label>
+
+              <textarea
+                id="issueDescription"
+                name="issueDescription"
+                rows="4"
+                placeholder="Tell us about any problem, unusual sound, warning light or additional requirement..."
+              ></textarea>
+
+            </div>
+
+
+
+            <!-- PHOTOS -->
+
+            <div class="photo-box">
+
+              <div>
+
+                <strong>
+                  Add photos of your bike
+                </strong>
+
+                <p>
+                  Optional • Up to 4 photos
+                </p>
+
+              </div>
+
+
+              <label
+                class="photo-button"
+                for="bikePhotos"
+              >
+                ＋ Add Photos
+              </label>
+
+
               <input
-                id="googleMapsLink"
-                name="googleMapsLink"
-                type="url"
-                placeholder="https://maps.google.com/..."
+                id="bikePhotos"
+                type="file"
+                accept="image/*"
+                multiple
+                hidden
               >
 
+            </div>
 
-              <small class="hint">
 
-                Google Maps → select your location →
-                Share → Copy link → paste here.
+            <div
+              id="photoPreview"
+              class="photo-preview"
+            ></div>
 
-              </small>
+          </section>
 
+
+
+          <!-- ===========================================
+               STEP 4
+          ============================================ -->
+
+          <section
+            class="step-panel"
+            data-panel="4"
+          >
+
+            <div class="panel-head">
+
+              <div class="number">
+                04
+              </div>
+
+              <div>
+
+                <h2>
+                  Where should we pick up your bike?
+                </h2>
+
+                <p>
+                  A precise location helps us avoid pickup delays.
+                </p>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- ADDRESS -->
+
+            <div class="field">
+
+              <label for="pickupAddress">
+
+                Pickup Address
+                <em>*</em>
+
+              </label>
+
+              <textarea
+                id="pickupAddress"
+                name="pickupAddress"
+                rows="4"
+                placeholder="House / building, street, area, landmark, city..."
+              ></textarea>
 
               <small class="error"></small>
 
             </div>
 
 
-            <a
-              id="viewLocation"
-              class="view-map hidden"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
 
-              ↗
-              View location on Google Maps
+            <!-- LOCATION -->
 
-            </a>
+            <div class="location-box">
 
 
-            <!-- Hidden technical location data -->
+              <div class="location-title">
 
-            <input
-              id="latitude"
-              name="latitude"
-              type="hidden"
-            >
+                <div class="pin">
+                  ⌖
+                </div>
 
-            <input
-              id="longitude"
-              name="longitude"
-              type="hidden"
-            >
+                <div>
 
-          </div>
+                  <strong>
+
+                    Share your exact location
+                    <em>*</em>
+
+                  </strong>
+
+                  <p>
+                    Required for pickup coordination.
+                  </p>
+
+                </div>
+
+              </div>
 
 
 
-          <!-- PICKUP DATE/TIME -->
+              <!-- CURRENT LOCATION -->
 
-          <div class="pickup-times">
+              <button
+                type="button"
+                class="gps-button"
+                id="useCurrentLocation"
+              >
 
-            <div class="subhead">
+                ◎
+                Use My Current Location
 
-              <strong>
-                When should we pick it up?
-              </strong>
+              </button>
+
+
+              <div
+                id="locationStatus"
+                class="location-status"
+                aria-live="polite"
+              ></div>
+
+
+
+              <!-- OR -->
+
+              <div class="or">
+                <span>
+                  OR
+                </span>
+              </div>
+
+
+
+              <!-- GOOGLE MAP LINK -->
+
+              <div class="field">
+
+                <label for="googleMapsLink">
+
+                  Google Maps Location
+                  <em>*</em>
+
+                </label>
+
+                <input
+                  id="googleMapsLink"
+                  name="googleMapsLink"
+                  type="url"
+                  placeholder="https://maps.google.com/..."
+                >
+
+                <small class="hint">
+
+                  Open Google Maps → select your pickup location
+                  → Share → Copy link → paste here.
+
+                </small>
+
+                <small class="error"></small>
+
+              </div>
+
+
+              <a
+                id="viewLocation"
+                class="view-map hidden"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+
+                ↗
+                View location on Google Maps
+
+              </a>
+
+
+
+              <!-- Hidden coordinates -->
+
+              <input
+                id="latitude"
+                name="latitude"
+                type="hidden"
+              >
+
+              <input
+                id="longitude"
+                name="longitude"
+                type="hidden"
+              >
+
+            </div>
+
+
+
+            <!-- PICKUP DATE/TIME -->
+
+            <div class="pickup-times">
+
+              <div class="subhead">
+
+                <strong>
+                  When should we pick it up?
+                </strong>
+
+                <span>
+                  Choose a convenient slot.
+                </span>
+
+              </div>
+
+
+              <div class="grid">
+
+
+                <div class="field">
+
+                  <label for="pickupDate">
+
+                    Preferred Pickup Date
+                    <em>*</em>
+
+                  </label>
+
+                  <input
+                    id="pickupDate"
+                    name="pickupDate"
+                    type="date"
+                  >
+
+                  <small class="error"></small>
+
+                </div>
+
+
+
+                <div class="field">
+
+                  <label for="pickupTime">
+
+                    Preferred Pickup Time
+                    <em>*</em>
+
+                  </label>
+
+                  <select
+                    id="pickupTime"
+                    name="pickupTime"
+                  >
+
+                    <option value="">
+                      Choose a time slot
+                    </option>
+
+                    <option>
+                      9:00 AM – 11:00 AM
+                    </option>
+
+                    <option>
+                      11:00 AM – 1:00 PM
+                    </option>
+
+                    <option>
+                      1:00 PM – 3:00 PM
+                    </option>
+
+                    <option>
+                      3:00 PM – 5:00 PM
+                    </option>
+
+                    <option>
+                      5:00 PM – 7:00 PM
+                    </option>
+
+                  </select>
+
+                  <small class="error"></small>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+
+          <!-- ===========================================
+               STEP 5
+          ============================================ -->
+
+          <section
+            class="step-panel"
+            data-panel="5"
+          >
+
+            <div class="panel-head">
+
+              <div class="number">
+                05
+              </div>
+
+              <div>
+
+                <h2>
+                  Almost there
+                </h2>
+
+                <p>
+                  Review your request and send it to REVIGOO.
+                </p>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- REVIEW -->
+
+            <div
+              id="reviewCard"
+              class="review-card"
+            ></div>
+
+
+
+            <!-- CONSENT -->
+
+            <label class="consent">
+
+              <input
+                id="consent"
+                name="consent"
+                type="checkbox"
+              >
+
+              <span class="fake-check">
+                ✓
+              </span>
 
               <span>
-                Choose a convenient slot.
+
+                I agree to be contacted by REVIGOO
+                regarding my service request.
+
+              </span>
+
+            </label>
+
+
+            <small
+              id="consentError"
+              class="error"
+            ></small>
+
+
+
+            <!-- PRIVACY -->
+
+            <div class="privacy">
+
+              <span>
+                🔒
+              </span>
+
+              <span>
+
+                Your information is used only to process
+                and coordinate your service request.
+
               </span>
 
             </div>
 
-
-            <div class="grid">
-
-
-              <div class="field">
-
-                <label for="pickupDate">
-
-                  Preferred Pickup Date
-                  <em>*</em>
-
-                </label>
-
-
-                <input
-                  id="pickupDate"
-                  name="pickupDate"
-                  type="date"
-                >
-
-
-                <small class="error"></small>
-
-              </div>
+          </section>
 
 
 
-              <div class="field">
+          <!-- ===========================================
+               NAVIGATION
+          ============================================ -->
 
-                <label for="pickupTime">
-
-                  Preferred Pickup Time
-                  <em>*</em>
-
-                </label>
+          <div class="form-nav">
 
 
-                <select
-                  id="pickupTime"
-                  name="pickupTime"
-                >
-
-                  <option value="">
-                    Choose a time slot
-                  </option>
-
-                  <option>
-                    9:00 AM – 11:00 AM
-                  </option>
-
-                  <option>
-                    11:00 AM – 1:00 PM
-                  </option>
-
-                  <option>
-                    1:00 PM – 3:00 PM
-                  </option>
-
-                  <option>
-                    3:00 PM – 5:00 PM
-                  </option>
-
-                  <option>
-                    5:00 PM – 7:00 PM
-                  </option>
-
-                </select>
-
-
-                <small class="error"></small>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </section>
-
-
-
-        <!-- =============================================
-             STEP 5 — CONFIRM
-        ============================================== -->
-
-        <section
-          class="step-panel"
-          data-panel="5"
-        >
-
-          <div class="panel-head">
-
-            <div class="number">
-              05
-            </div>
-
-            <div>
-
-              <h2>
-                Almost there
-              </h2>
-
-              <p>
-                Review your request and send it to REVIGOO.
-              </p>
-
-            </div>
-
-          </div>
-
-
-
-          <!-- REVIEW -->
-
-          <div
-            id="reviewCard"
-            class="review-card"
-          ></div>
-
-
-
-          <!-- CONSENT -->
-
-          <label class="consent">
-
-            <input
-              id="consent"
-              name="consent"
-              type="checkbox"
+            <button
+              type="button"
+              id="backButton"
+              class="back hidden"
             >
 
+              ←
+              Back
 
-            <span class="fake-check">
-              ✓
-            </span>
-
-
-            <span>
-
-              I agree to be contacted by REVIGOO
-              regarding my service request.
-
-            </span>
-
-          </label>
+            </button>
 
 
-          <small
-            id="consentError"
-            class="error"
-          ></small>
+            <button
+              type="button"
+              id="nextButton"
+              class="next"
+            >
+
+              Continue
+              <span>
+                →
+              </span>
+
+            </button>
 
 
+            <button
+              type="submit"
+              id="submitButton"
+              class="next hidden"
+            >
 
-          <!-- PRIVACY -->
+              <span class="submit-text">
+                Request Bike Service
+              </span>
 
-          <div class="privacy">
+              <span class="spinner"></span>
 
-            <span>
-              🔒
-            </span>
+              <span>
+                →
+              </span>
 
-            <span>
-
-              Your information is used only to process
-              and coordinate your service request.
-
-            </span>
+            </button>
 
           </div>
 
-        </section>
+        </form>
+
+      </section>
+
+    </div>
+    <!-- END bookingPage -->
 
 
 
-        <!-- =============================================
-             NAVIGATION
-        ============================================== -->
-
-        <div class="form-nav">
-
-
-          <button
-            type="button"
-            id="backButton"
-            class="back hidden"
-          >
-
-            ←
-            Back
-
-          </button>
-
-
-          <button
-            type="button"
-            id="nextButton"
-            class="next"
-          >
-
-            Continue
-            <span>→</span>
-
-          </button>
-
-
-          <button
-            type="submit"
-            id="submitButton"
-            class="next hidden"
-          >
-
-            <span class="submit-text">
-              Request Bike Service
-            </span>
-
-            <span class="spinner"></span>
-
-            <span>
-              →
-            </span>
-
-          </button>
-
-        </div>
-
-      </form>
-
-    </section>
-
-
-
-    <!-- =================================================
+    <!-- ===================================================
          SUCCESS SCREEN
-    ================================================== -->
+         Hero is NOT included here
+    ==================================================== -->
 
     <section
       id="successScreen"
@@ -1373,8 +1402,8 @@
 
 
         <p>
-          Our team will contact you shortly
-          to confirm the pickup.
+          Your service request has been received.
+          Our team will contact you shortly to confirm the pickup.
         </p>
 
 
@@ -1390,7 +1419,9 @@
 
           <strong
             id="requestIdDisplay"
-          ></strong>
+          >
+            REV-REQ-001
+          </strong>
 
 
           <small>
@@ -1404,19 +1435,22 @@
 
 
 
-        <!-- ACTIONS -->
+        <!-- SUCCESS ACTIONS -->
 
         <div class="success-actions">
 
 
-         <a
-              href="https://revigoo.in"
-              class="back-home"
-            >
-              Visit REVIGOO
-            </a>
+          <a
+            href="https://revigoo.in"
+            class="back-home"
+          >
+            Visit REVIGOO
+          </a>
 
-         <a
+
+          <!-- Replace YOUR_WHATSAPP_NUMBER -->
+
+          <a
             href="https://wa.me/919562005632?text=Hi%20REVIGOO,%20I%20have%20submitted%20a%20bike%20service%20request."
             target="_blank"
             rel="noopener noreferrer"
@@ -1425,12 +1459,12 @@
             Contact REVIGOO on WhatsApp
           </a>
 
-
         </div>
 
       </div>
 
     </section>
+
 
   </main>
 
@@ -1465,4 +1499,5 @@
   <script src="script.js"></script>
 
 </body>
+
 </html>
