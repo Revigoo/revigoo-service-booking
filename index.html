@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta
+    name="description"
+    content="Book your two-wheeler service with REVIGOO. Smart Bike Service, Made Simple."
+  />
+
+  <title>Book Bike Service | REVIGOO</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+  <header class="site-header">
+    <div class="header-inner">
+<a href="#" class="brand" aria-label="REVIGOO Home">
+  <div class="brand-text">
+    <div class="revigoo-wordmark">
+      <span>RE</span><span class="logo-v">V</span><span>IGOO</span>
+    </div>
+
+    <div class="brand-tagline">
+      Smart Bike Service, Made Simple.
+    </div>
+  </div>
+</a>
+      <a
+        class="support-link"
+        href="https://wa.me/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="support-icon">◉</span>
+        <span>Support</span>
+      </a>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- =========================
+         HERO
+    ========================== -->
+    <section class="hero">
+      <div class="hero-content">
+
+        <div class="hero-copy">
+          <div class="hero-badge">
+            <span></span>
+            Trusted Bike Service Platform
+          </div>
+
+          <h1>Book Your<br /><span>Bike Service</span></h1>
+
+          <p>
+            Tell us about your bike and we'll take care of the rest.
+          </p>
+        </div>
+
+        <!-- REVIGOO logo image on the right side of the hero -->
+
+        <div class="hero-bike">
+          <div class="bike-visual">
+            <div class="wheel wheel-left"></div>
+            <div class="wheel wheel-right"></div>
+            <div class="bike-frame"></div>
+            <div class="bike-seat"></div>
+            <div class="bike-handle"></div>
+          </div>
+
+          <div class="hero-circle"></div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         PROGRESS
+    ========================== -->
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="progress-steps">
+        <span class="active">1. Customer</span>
+        <span>2. Bike</span>
+        <span>3. Service</span>
+        <span>4. Pickup</span>
+        <span>5. Confirm</span>
+      </div>
+    </div>
+
+
+    <!-- =========================
+         FORM
+    ========================== -->
+    <form id="serviceForm" novalidate>
+
+      <!-- =========================
+           CUSTOMER DETAILS
+      ========================== -->
+      <section class="form-section" data-step="1">
+
+        <div class="section-heading">
+          <div class="section-number">01</div>
+          <div>
+            <h2>Customer Details</h2>
+            <p>Tell us how we can reach you.</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="field full">
+            <label for="customerName">
+              Full Name <span>*</span>
+            </label>
+
+            <input
+              type="text"
+              id="customerName"
+              name="customerName"
+              placeholder="Enter your full name"
+              autocomplete="name"
+              required
+            />
+
+            <small class="error-message"></small>
+          </div>
+
+
+          <div class="field">
+            <label for="mobileNumber">
+              Mobile Number <span>*</span>
+            </label>
+
+            <input
+              type="tel"
+              id="mobileNumber"
+              name="mobileNumber"
+              placeholder="10-digit mobile number"
+              autocomplete="tel"
+              inputmode="numeric"
+              maxlength="10"
+              required
+            />
+
+            <small class="error-message"></small>
+          </div>
+
+
+          <div class="field">
+            <label for="whatsappNumber">
+              WhatsApp Number
+            </label>
+
+            <input
+              type="tel"
+              id="whatsappNumber"
+              name="whatsappNumber"
+              placeholder="WhatsApp number"
+              inputmode="numeric"
+              maxlength="10"
+            />
+
+            <small class="error-message"></small>
+          </div>
+
+
+          <div class="field full">
+            <label for="email">
+              Email Address
+            </label>
+
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+            />
+
+            <small class="error-message"></small>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           VEHICLE DETAILS
+      ========================== -->
+      <section class="form-section" data-step="2">
+
+        <div class="section-heading">
+          <div class="section-number">02</div>
+          <div>
+            <h2>Your Bike</h2>
+            <p>Help us identify your two-wheeler.</p>
+          </div>
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="field full">
+            <label for="registrationNumber">
+              Bike Registration Number <span>*</span>
+            </label>
+
+            <input
+              type="text"
+              id="registrationNumber"
+              name="registrationNumber"
+              placeholder="KL 00 XX 0000"
+              autocomplete="off"
+              required
+            />
+
+            <small class="field-hint">
+              Example: KL 00 AB 1234
+            </small>
+
+            <small class="error-message"></small>
+          </div>
+
+
+          <div class="field">
+            <label for="bikeBrand">
+              Bike Brand <span>*</span>
+            </label>
+
+            <input
+              type="text"
+              id="bikeBrand"
+              name="bikeBrand"
+              placeholder="e.g. Honda"
+              required
+            />
+
+            <small class="error-message"></small>
+          </div>
+
+
+          <div class="field">
+            <label for="bikeModel">
+              Bike Model <span>*</span>
+            </label>
+
+            <input
+              type="text"
+              id="bikeModel"
+              name="bikeModel"
+              placeholder="e.g. Activa 6G"
+              required
+            />
+
+            <small class="error-message"></small>
+          </div>
+
+
+          <div class="field">
+            <label for="manufacturingYear">
+              Manufacturing Year
+            </label>
+
+            <input
+              type="number"
+              id="manufacturingYear"
+              name="manufacturingYear"
+              placeholder="e.g. 2022"
+              min="1950"
+              max="2026"
+              inputmode="numeric"
+            />
+
+            <small class="error-message"></small>
+          </div>
+
+
+          <div class="field">
+            <label for="odometer">
+              Current Odometer
+            </label>
+
+            <div class="input-with-unit">
+              <input
+                type="number"
+                id="odometer"
+                name="odometer"
+                placeholder="e.g. 24000"
+                min="0"
+                inputmode="numeric"
+              />
+              <span>km</span>
+            </div>
+
+            <small class="error-message"></small>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           SERVICE REQUIREMENT
+      ========================== -->
+      <section class="form-section" data-step="3">
+
+        <div class="section-heading">
+          <div class="section-number">03</div>
+          <div>
+            <h2>Service Requirement</h2>
+            <p>What does your bike need?</p>
+          </div>
+        </div>
+
+
+        <div class="service-grid">
+
+          <label class="service-card">
+            <input type="checkbox" name="services" value="General Service" />
+            <span class="service-check">✓</span>
+            <span class="service-icon">🔧</span>
+            <strong>General Service</strong>
+          </label>
+
+
+          <label class="service-card">
+            <input type="checkbox" name="services" value="Full Service" />
+            <span class="service-check">✓</span>
+            <span class="service-icon">🛠</span>
+            <strong>Full Service</strong>
+          </label>
+
+
+          <label class="service-card">
+            <input type="checkbox" name="services" value="Engine Oil Change" />
+            <span class="service-check">✓</span>
+            <span class="service-icon">🛢</span>
+            <strong>Engine Oil</strong>
+          </label>
+
+
+          <label class="service-card">
+            <input type="checkbox" name="services" value="Brake Service" />
+            <span class="service-check">✓</span>
+            <span class="service-icon">⭕</span>
+            <strong>Brake Service</strong>
+          </label>
+
+
+          <label class="service-card">
+            <input type="checkbox" name="services" value="Battery Service" />
+            <span class="service-check">✓</span>
+            <span class="service-icon">🔋</span>
+            <strong>Battery</strong>
+          </label>
+
+
+          <label class="service-card">
+            <input type="checkbox" name="services" value="Tyre Service" />
+            <span class="service-check">✓</span>
+            <span class="service-icon">⚫</span>
+            <strong>Tyre Service</strong>
+          </label>
+
+
+          <label class="service-card">
+            <input type="checkbox" name="services" value="Chain & Sprocket" />
+            <span class="service-check">✓</span>
+            <span class="service-icon">⚙</span>
+            <strong>Chain & Sprocket</strong>
+          </label>
+
+
+          <label class="service-card">
+            <input type="checkbox" name="services" value="Bike Cleaning" />
+            <span class="service-check">✓</span>
+            <span class="service-icon">✨</span>
+            <strong>Bike Cleaning</strong>
+          </label>
+
+
+          <label class="service-card">
+            <input type="checkbox" name="services" value="Other" />
+            <span class="service-check">✓</span>
+            <span class="service-icon">＋</span>
+            <strong>Other</strong>
+          </label>
+
+        </div>
+
+        <small id="serviceError" class="error-message service-error"></small>
+
+
+        <div class="field issue-field">
+          <label for="issueDescription">
+            Describe the issue / additional requirements
+          </label>
+
+          <textarea
+            id="issueDescription"
+            name="issueDescription"
+            rows="5"
+            placeholder="Tell us about any problem, sound, warning light or additional work..."
+          ></textarea>
+
+          <small class="field-hint">
+            The more details you provide, the better we can prepare.
+          </small>
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           PICKUP LOCATION
+      ========================== -->
+      <section class="form-section" data-step="4">
+
+        <div class="section-heading">
+          <div class="section-number">04</div>
+          <div>
+            <h2>Pickup Location</h2>
+            <p>Where should we collect your bike?</p>
+          </div>
+        </div>
+
+
+        <div class="location-card">
+
+          <div class="location-card-header">
+            <div class="location-icon">⌖</div>
+
+            <div>
+              <h3>Pickup Address <span>*</span></h3>
+              <p>Provide the complete address for pickup.</p>
+            </div>
+          </div>
+
+
+          <div class="field">
+            <label for="pickupAddress">
+              Complete Pickup Address <span>*</span>
+            </label>
+
+            <textarea
+              id="pickupAddress"
+              name="pickupAddress"
+              rows="4"
+              placeholder="House / building, street, area, landmark, city..."
+              required
+            ></textarea>
+
+            <small class="error-message"></small>
+          </div>
+
+        </div>
+
+
+        <div class="maps-card">
+
+          <div class="maps-header">
+            <div>
+              <h3>Google Maps Location</h3>
+              <p>
+                Open Google Maps, select your pickup location, tap
+                <strong>Share</strong>, and paste the location link here.
+              </p>
+            </div>
+
+            <span class="maps-badge">Optional</span>
+          </div>
+
+
+          <div class="field">
+            <label for="googleMapsLink">
+              Google Maps Link
+            </label>
+
+            <input
+              type="url"
+              id="googleMapsLink"
+              name="googleMapsLink"
+              placeholder="Paste Google Maps location link"
+            />
+
+            <small class="error-message"></small>
+          </div>
+
+
+          <div class="location-actions">
+
+            <button
+              type="button"
+              class="secondary-button"
+              id="useCurrentLocation"
+            >
+              <span>◎</span>
+              Use My Current Location
+            </button>
+
+
+            <a
+              href="https://maps.google.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="secondary-button link-button"
+            >
+              <span>↗</span>
+              Open Google Maps
+            </a>
+
+          </div>
+
+
+          <div class="coordinates">
+
+            <div class="field">
+              <label for="latitude">Latitude</label>
+
+              <input
+                type="text"
+                id="latitude"
+                name="latitude"
+                placeholder="e.g. 10.0159"
+                readonly
+              />
+            </div>
+
+
+            <div class="field">
+              <label for="longitude">Longitude</label>
+
+              <input
+                type="text"
+                id="longitude"
+                name="longitude"
+                placeholder="e.g. 76.3419"
+                readonly
+              />
+            </div>
+
+          </div>
+
+
+          <p id="locationStatus" class="location-status"></p>
+
+        </div>
+
+
+        <!-- Pickup preference -->
+
+        <div class="pickup-preference">
+
+          <h3>Pickup Preference</h3>
+
+          <div class="form-grid">
+
+            <div class="field">
+              <label for="pickupDate">
+                Preferred Pickup Date <span>*</span>
+              </label>
+
+              <input
+                type="date"
+                id="pickupDate"
+                name="pickupDate"
+                required
+              />
+
+              <small class="error-message"></small>
+            </div>
+
+
+            <div class="field">
+              <label for="pickupTime">
+                Preferred Pickup Time <span>*</span>
+              </label>
+
+              <select
+                id="pickupTime"
+                name="pickupTime"
+                required
+              >
+                <option value="">Select a time</option>
+                <option value="9:00 AM – 11:00 AM">9:00 AM – 11:00 AM</option>
+                <option value="11:00 AM – 1:00 PM">11:00 AM – 1:00 PM</option>
+                <option value="1:00 PM – 3:00 PM">1:00 PM – 3:00 PM</option>
+                <option value="3:00 PM – 5:00 PM">3:00 PM – 5:00 PM</option>
+                <option value="5:00 PM – 7:00 PM">5:00 PM – 7:00 PM</option>
+              </select>
+
+              <small class="error-message"></small>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =========================
+           CONSENT / CONFIRM
+      ========================== -->
+      <section class="confirmation-section">
+
+        <label class="consent">
+          <input
+            type="checkbox"
+            id="consent"
+            name="consent"
+            required
+          />
+
+          <span class="custom-checkbox">✓</span>
+
+          <span>
+            I agree to be contacted by REVIGOO regarding my service request.
+          </span>
+        </label>
+
+        <small id="consentError" class="error-message"></small>
+
+
+        <div class="privacy-note">
+          <span>🔒</span>
+          Your information is used only to process and coordinate your service
+          request.
+        </div>
+
+
+        <button
+          type="submit"
+          class="submit-button"
+          id="submitButton"
+        >
+          <span class="button-text">Request Bike Service</span>
+          <span class="button-loader"></span>
+          <span class="button-arrow">→</span>
+        </button>
+
+      </section>
+
+    </form>
+
+
+    <!-- =========================
+         SUCCESS SCREEN
+    ========================== -->
+    <section id="successScreen" class="success-screen hidden">
+
+      <div class="success-card">
+
+        <div class="success-icon">
+          ✓
+        </div>
+
+        <span class="success-label">REQUEST RECEIVED</span>
+
+        <h2>Service Request Received 🎉</h2>
+
+        <p>
+          Thank you for choosing REVIGOO.
+        </p>
+
+        <p class="success-description">
+          Your service request has been received. Our team will contact you
+          shortly to confirm the pickup.
+        </p>
+
+
+        <div class="request-id-card">
+
+          <span>Temporary Request ID</span>
+
+          <strong id="requestIdDisplay">
+            REV-REQ-000000
+          </strong>
+
+          <small>
+            The final REVIGOO Service Job ID will be assigned after confirmation.
+          </small>
+
+        </div>
+
+
+        <div class="success-actions">
+
+          <a href="#" class="secondary-button">
+            Back to REVIGOO
+          </a>
+
+          <a
+            href="https://wa.me/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="submit-button whatsapp-button"
+          >
+            Contact REVIGOO on WhatsApp
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+  <footer class="site-footer">
+
+    <strong>REVIGOO</strong>
+
+    <span>
+      Smart Bike Service, Made Simple.
+    </span>
+
+    <small>
+      © 2026 REVIGOO. All rights reserved.
+    </small>
+
+  </footer>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
