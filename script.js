@@ -2154,7 +2154,7 @@ async function submitForm(
 
 
     document.getElementById(
-      "booking"
+       "bookingPage"
     ).classList.add(
       "hidden"
     );
