@@ -17,12 +17,12 @@
   Example:
 
   const GOOGLE_SCRIPT_URL =
-    "https://script.google.com/macros/s/XXXXXXXX/exec";
+    "https://script.google.com/macros/s/XXXXXXXXXXXX/exec";
 
 */
 
 const GOOGLE_SCRIPT_URL =
-  "YOUR_GOOGLE_APPS_SCRIPT_URL";
+  "https://script.google.com/macros/s/AKfycbw48f5hoyW9IZbgQPpAf5o72YUYxbrPxqDc7Ll2n81Syd40Y62CEAUhPA-gWoeUsLIT/exec";
 
 
 /* =========================================================
@@ -67,17 +67,8 @@ let submitting = false;
 let photos = [];
 
 
-const stepNames = [
-  "Customer",
-  "Bike",
-  "Service",
-  "Pickup",
-  "Confirm"
-];
-
-
 /* =========================================================
-   PAGE INITIALIZATION
+   INITIALIZE
 ========================================================= */
 
 document.addEventListener(
@@ -88,39 +79,38 @@ document.addEventListener(
 
 function initializeApp() {
 
-  /*
-    Prevent customers from selecting
-    a previous pickup date.
-  */
-
   setMinimumPickupDate();
 
 
-  /*
-    Registration number automatically
-    becomes uppercase.
-  */
+  /* -------------------------------------------------------
+     REGISTRATION NUMBER
+  ------------------------------------------------------- */
 
   const registration =
     document.getElementById(
       "registrationNumber"
     );
 
-  registration.addEventListener(
-    "input",
-    function () {
 
-      this.value =
-        this.value
-          .toUpperCase();
+  if (registration) {
 
-    }
-  );
+    registration.addEventListener(
+      "input",
+      function () {
+
+        this.value =
+          this.value
+            .toUpperCase();
+
+      }
+    );
+
+  }
 
 
-  /*
-    Mobile number validation.
-  */
+  /* -------------------------------------------------------
+     PHONE NUMBERS
+  ------------------------------------------------------- */
 
   const mobileFields = [
     "mobileNumber",
@@ -133,6 +123,12 @@ function initializeApp() {
 
       const input =
         document.getElementById(id);
+
+
+      if (!input) {
+        return;
+      }
+
 
       input.addEventListener(
         "input",
@@ -150,103 +146,141 @@ function initializeApp() {
   );
 
 
-  /*
-    Current location.
-  */
+  /* -------------------------------------------------------
+     CURRENT LOCATION
+  ------------------------------------------------------- */
 
-  document
-    .getElementById("useCurrentLocation")
-    .addEventListener(
+  const locationButton =
+    document.getElementById(
+      "useCurrentLocation"
+    );
+
+
+  if (locationButton) {
+
+    locationButton.addEventListener(
       "click",
       getCurrentLocation
     );
 
+  }
 
-  /*
-    Google Maps link.
-  */
 
-  document
-    .getElementById("googleMapsLink")
-    .addEventListener(
+  /* -------------------------------------------------------
+     GOOGLE MAPS LINK
+  ------------------------------------------------------- */
+
+  const mapsLink =
+    document.getElementById(
+      "googleMapsLink"
+    );
+
+
+  if (mapsLink) {
+
+    mapsLink.addEventListener(
       "input",
       updateMapPreview
     );
 
+  }
 
-  /*
-    Photo upload.
-  */
 
-  document
-    .getElementById("bikePhotos")
-    .addEventListener(
+  /* -------------------------------------------------------
+     PHOTO UPLOAD
+  ------------------------------------------------------- */
+
+  const photoInput =
+    document.getElementById(
+      "bikePhotos"
+    );
+
+
+  if (photoInput) {
+
+    photoInput.addEventListener(
       "change",
       handlePhotos
     );
 
-
-  /*
-    Continue button.
-  */
-
-  nextButton.addEventListener(
-    "click",
-    function () {
-
-      if (
-        !validateStep(
-          currentStep
-        )
-      ) {
-
-        return;
-
-      }
+  }
 
 
-      if (currentStep === 4) {
+  /* -------------------------------------------------------
+     NEXT
+  ------------------------------------------------------- */
 
-        buildReview();
+  if (nextButton) {
 
-      }
+    nextButton.addEventListener(
+      "click",
+      function () {
+
+        if (
+          !validateStep(
+            currentStep
+          )
+        ) {
+
+          return;
+
+        }
 
 
-      if (currentStep < 5) {
+        if (
+          currentStep === 4
+        ) {
 
-        showStep(
-          currentStep + 1
-        );
+          buildReview();
 
-      }
-
-    }
-  );
+        }
 
 
-  /*
-    Back button.
-  */
+        if (
+          currentStep < 5
+        ) {
 
-  backButton.addEventListener(
-    "click",
-    function () {
+          showStep(
+            currentStep + 1
+          );
 
-      if (currentStep > 1) {
-
-        showStep(
-          currentStep - 1
-        );
+        }
 
       }
+    );
 
-    }
-  );
+  }
 
 
-  /*
-    Step buttons.
-  */
+  /* -------------------------------------------------------
+     BACK
+  ------------------------------------------------------- */
+
+  if (backButton) {
+
+    backButton.addEventListener(
+      "click",
+      function () {
+
+        if (
+          currentStep > 1
+        ) {
+
+          showStep(
+            currentStep - 1
+          );
+
+        }
+
+      }
+    );
+
+  }
+
+
+  /* -------------------------------------------------------
+     STEP BUTTONS
+  ------------------------------------------------------- */
 
   stepButtons.forEach(
     function (button) {
@@ -260,11 +294,6 @@ function initializeApp() {
               this.dataset.step
             );
 
-
-          /*
-            Do not allow skipping
-            incomplete sections.
-          */
 
           if (
             target < currentStep
@@ -293,19 +322,23 @@ function initializeApp() {
   );
 
 
-  /*
-    Final form submission.
-  */
+  /* -------------------------------------------------------
+     FINAL SUBMIT
+  ------------------------------------------------------- */
 
-  form.addEventListener(
-    "submit",
-    submitForm
-  );
+  if (form) {
+
+    form.addEventListener(
+      "submit",
+      submitForm
+    );
+
+  }
 
 
-  /*
-    Start at Step 1.
-  */
+  /* -------------------------------------------------------
+     INITIAL STEP
+  ------------------------------------------------------- */
 
   showStep(1);
 
@@ -321,9 +354,9 @@ function showStep(step) {
   currentStep = step;
 
 
-  /*
-    Show correct panel.
-  */
+  /* -------------------------------------------------------
+     PANELS
+  ------------------------------------------------------- */
 
   panels.forEach(
     function (panel) {
@@ -332,6 +365,7 @@ function showStep(step) {
         Number(
           panel.dataset.panel
         );
+
 
       panel.classList.toggle(
         "active",
@@ -342,9 +376,9 @@ function showStep(step) {
   );
 
 
-  /*
-    Update step indicators.
-  */
+  /* -------------------------------------------------------
+     STEP INDICATORS
+  ------------------------------------------------------- */
 
   stepButtons.forEach(
     function (button) {
@@ -353,6 +387,7 @@ function showStep(step) {
         Number(
           button.dataset.step
         );
+
 
       button.classList.toggle(
         "active",
@@ -363,84 +398,127 @@ function showStep(step) {
   );
 
 
-  /*
-    Update progress bar.
-  */
+  /* -------------------------------------------------------
+     PROGRESS
+  ------------------------------------------------------- */
 
-  progressFill.style.width =
-    `${step * 20}%`;
+  if (progressFill) {
 
+    progressFill.style.width =
+      `${step * 20}%`;
 
-  /*
-    Update text.
-  */
-
-  stepLabel.textContent =
-    `Step ${step} of 5`;
-
-  stepTitle.textContent =
-    stepNames[step - 1];
+  }
 
 
-  /*
-    Back button.
-  */
+  /* -------------------------------------------------------
+     STEP TEXT
+  ------------------------------------------------------- */
 
-  backButton.classList.toggle(
-    "hidden",
-    step === 1
-  );
+  const stepNames = [
+
+    "Customer",
+    "Bike",
+    "Service",
+    "Pickup",
+    "Confirm"
+
+  ];
 
 
-  /*
-    Continue button.
-  */
+  if (stepLabel) {
 
-  nextButton.classList.toggle(
-    "hidden",
+    stepLabel.textContent =
+      `Step ${step} of 5`;
+
+  }
+
+
+  if (stepTitle) {
+
+    stepTitle.textContent =
+      stepNames[step - 1];
+
+  }
+
+
+  /* -------------------------------------------------------
+     BACK BUTTON
+  ------------------------------------------------------- */
+
+  if (backButton) {
+
+    backButton.classList.toggle(
+      "hidden",
+      step === 1
+    );
+
+  }
+
+
+  /* -------------------------------------------------------
+     NEXT BUTTON
+  ------------------------------------------------------- */
+
+  if (nextButton) {
+
+    nextButton.classList.toggle(
+      "hidden",
+      step === 5
+    );
+
+  }
+
+
+  /* -------------------------------------------------------
+     SUBMIT BUTTON
+  ------------------------------------------------------- */
+
+  if (submitButton) {
+
+    submitButton.classList.toggle(
+      "hidden",
+      step !== 5
+    );
+
+  }
+
+
+  /* -------------------------------------------------------
+     REVIEW
+  ------------------------------------------------------- */
+
+  if (
     step === 5
-  );
-
-
-  /*
-    Submit button.
-  */
-
-  submitButton.classList.toggle(
-    "hidden",
-    step !== 5
-  );
-
-
-  /*
-    Build review screen.
-  */
-
-  if (step === 5) {
+  ) {
 
     buildReview();
 
   }
 
 
-  /*
-    Scroll back to booking section.
-  */
+  /* -------------------------------------------------------
+     SCROLL
+  ------------------------------------------------------- */
 
   const booking =
     document.getElementById(
       "booking"
     );
 
-  window.scrollTo({
 
-    top:
-      booking.offsetTop - 10,
+  if (booking) {
 
-    behavior:
-      "smooth"
+    window.scrollTo({
 
-  });
+      top:
+        booking.offsetTop - 10,
+
+      behavior:
+        "smooth"
+
+    });
+
+  }
 
 }
 
@@ -449,7 +527,9 @@ function showStep(step) {
    VALIDATE PREVIOUS STEPS
 ========================================================= */
 
-function validateStepsBefore(target) {
+function validateStepsBefore(
+  target
+) {
 
   for (
     let i = 1;
@@ -476,7 +556,7 @@ function validateStepsBefore(target) {
 
 
 /* =========================================================
-   STEP VALIDATION
+   VALIDATE STEP
 ========================================================= */
 
 function validateStep(step) {
@@ -484,11 +564,13 @@ function validateStep(step) {
   clearErrors();
 
 
-  /* -------------------------------------------------------
-     CUSTOMER
-  ------------------------------------------------------- */
+  /* =======================================================
+     STEP 1 - CUSTOMER
+  ====================================================== */
 
-  if (step === 1) {
+  if (
+    step === 1
+  ) {
 
     let valid = true;
 
@@ -503,15 +585,18 @@ function validateStep(step) {
         "mobileNumber"
       );
 
+    const whatsapp =
+      document.getElementById(
+        "whatsappNumber"
+      );
+
     const email =
       document.getElementById(
         "email"
       );
 
 
-    /*
-      Name.
-    */
+    /* Name */
 
     if (
       !name.value.trim()
@@ -527,9 +612,7 @@ function validateStep(step) {
     }
 
 
-    /*
-      Indian mobile number.
-    */
+    /* Mobile */
 
     if (
       !/^[6-9]\d{9}$/.test(
@@ -547,9 +630,26 @@ function validateStep(step) {
     }
 
 
-    /*
-      Email only if entered.
-    */
+    /* WhatsApp - optional */
+
+    if (
+      whatsapp.value.trim() &&
+      !/^[6-9]\d{9}$/.test(
+        whatsapp.value.trim()
+      )
+    ) {
+
+      fieldError(
+        whatsapp,
+        "Please enter a valid 10-digit WhatsApp number."
+      );
+
+      valid = false;
+
+    }
+
+
+    /* Email - optional */
 
     if (
       email.value.trim() &&
@@ -573,23 +673,27 @@ function validateStep(step) {
   }
 
 
-  /* -------------------------------------------------------
-     BIKE
-  ------------------------------------------------------- */
+  /* =======================================================
+     STEP 2 - BIKE
+  ====================================================== */
 
-  if (step === 2) {
+  if (
+    step === 2
+  ) {
 
     let valid = true;
 
 
-    const requiredBikeFields = [
+    const requiredFields = [
+
       "registrationNumber",
       "bikeBrand",
       "bikeModel"
+
     ];
 
 
-    requiredBikeFields.forEach(
+    requiredFields.forEach(
       function (id) {
 
         const input =
@@ -613,77 +717,18 @@ function validateStep(step) {
     );
 
 
-    /*
-      Manufacturing year.
-    */
-
-    const year =
-      document.getElementById(
-        "manufacturingYear"
-      );
-
-
-    if (year.value) {
-
-      const currentYear =
-        new Date().getFullYear();
-
-      const selectedYear =
-        Number(year.value);
-
-
-      if (
-        selectedYear < 1950 ||
-        selectedYear > currentYear
-      ) {
-
-        fieldError(
-          year,
-          "Please enter a valid manufacturing year."
-        );
-
-        valid = false;
-
-      }
-
-    }
-
-
-    /*
-      Odometer.
-    */
-
-    const odometer =
-      document.getElementById(
-        "odometer"
-      );
-
-
-    if (
-      odometer.value &&
-      Number(odometer.value) < 0
-    ) {
-
-      fieldError(
-        odometer,
-        "Please enter a valid odometer reading."
-      );
-
-      valid = false;
-
-    }
-
-
     return valid;
 
   }
 
 
-  /* -------------------------------------------------------
-     SERVICE
-  ------------------------------------------------------- */
+  /* =======================================================
+     STEP 3 - SERVICE
+  ====================================================== */
 
-  if (step === 3) {
+  if (
+    step === 3
+  ) {
 
     const selectedServices =
       document.querySelectorAll(
@@ -695,10 +740,18 @@ function validateStep(step) {
       selectedServices.length === 0
     ) {
 
-      document.getElementById(
-        "serviceError"
-      ).textContent =
-        "Please select at least one service.";
+      const serviceError =
+        document.getElementById(
+          "serviceError"
+        );
+
+
+      if (serviceError) {
+
+        serviceError.textContent =
+          "Please select at least one service.";
+
+      }
 
 
       return false;
@@ -711,11 +764,13 @@ function validateStep(step) {
   }
 
 
-  /* -------------------------------------------------------
-     PICKUP
-  ------------------------------------------------------- */
+  /* =======================================================
+     STEP 4 - PICKUP
+  ====================================================== */
 
-  if (step === 4) {
+  if (
+    step === 4
+  ) {
 
     let valid = true;
 
@@ -741,9 +796,7 @@ function validateStep(step) {
       );
 
 
-    /*
-      Address.
-    */
+    /* Pickup address */
 
     if (
       !address.value.trim()
@@ -759,9 +812,7 @@ function validateStep(step) {
     }
 
 
-    /*
-      Google Maps link is REQUIRED.
-    */
+    /* Google Maps link REQUIRED */
 
     if (
       !mapsLink.value.trim()
@@ -769,7 +820,7 @@ function validateStep(step) {
 
       fieldError(
         mapsLink,
-        "Please provide your Google Maps location."
+        "Google Maps location is required."
       );
 
       valid = false;
@@ -784,7 +835,7 @@ function validateStep(step) {
 
       fieldError(
         mapsLink,
-        "Please enter a valid Google Maps link."
+        "Please enter a valid Google Maps location link."
       );
 
       valid = false;
@@ -792,9 +843,7 @@ function validateStep(step) {
     }
 
 
-    /*
-      Pickup date.
-    */
+    /* Pickup date */
 
     if (
       !pickupDate.value
@@ -810,9 +859,7 @@ function validateStep(step) {
     }
 
 
-    /*
-      Pickup time.
-    */
+    /* Pickup time */
 
     if (
       !pickupTime.value
@@ -833,11 +880,13 @@ function validateStep(step) {
   }
 
 
-  /* -------------------------------------------------------
-     CONFIRMATION
-  ------------------------------------------------------- */
+  /* =======================================================
+     STEP 5 - CONSENT
+  ====================================================== */
 
-  if (step === 5) {
+  if (
+    step === 5
+  ) {
 
     const consent =
       document.getElementById(
@@ -849,10 +898,19 @@ function validateStep(step) {
       !consent.checked
     ) {
 
-      document.getElementById(
-        "consentError"
-      ).textContent =
-        "Please agree before submitting.";
+      const consentError =
+        document.getElementById(
+          "consentError"
+        );
+
+
+      if (consentError) {
+
+        consentError.textContent =
+          "Please agree before submitting.";
+
+      }
+
 
       return false;
 
@@ -878,14 +936,17 @@ function fieldError(
   message
 ) {
 
+  if (!input) {
+    return;
+  }
+
+
   const field =
     input.closest(".field");
 
 
   if (!field) {
-
     return;
-
   }
 
 
@@ -921,10 +982,13 @@ function clearErrors() {
       ".field.invalid"
     )
     .forEach(
-      field =>
+      function (field) {
+
         field.classList.remove(
           "invalid"
-        )
+        );
+
+      }
     );
 
 
@@ -933,9 +997,27 @@ function clearErrors() {
       ".error"
     )
     .forEach(
-      error =>
-        error.textContent = ""
+      function (error) {
+
+        error.textContent =
+          "";
+
+      }
     );
+
+
+  const serviceError =
+    document.getElementById(
+      "serviceError"
+    );
+
+
+  if (serviceError) {
+
+    serviceError.textContent =
+      "";
+
+  }
 
 
   const consentError =
@@ -966,6 +1048,11 @@ function setMinimumPickupDate() {
     );
 
 
+  if (!dateInput) {
+    return;
+  }
+
+
   const today =
     new Date();
 
@@ -973,12 +1060,10 @@ function setMinimumPickupDate() {
   const year =
     today.getFullYear();
 
-
   const month =
     String(
       today.getMonth() + 1
     ).padStart(2, "0");
-
 
   const day =
     String(
@@ -1008,26 +1093,47 @@ function isMapsLink(value) {
       url.hostname.toLowerCase();
 
 
+    /*
+      Accept:
+
+      google.com/maps
+      www.google.com/maps
+      maps.google.com
+      maps.app.goo.gl
+      goo.gl
+    */
+
     return (
 
-      hostname.includes(
-        "google.com"
-      ) &&
+      hostname ===
+        "google.com" ||
 
-      (
-        url.pathname.includes(
-          "/maps"
-        ) ||
-        hostname.includes(
-          "maps.google"
-        )
-      )
+      hostname.endsWith(
+        ".google.com"
+      ) ||
 
-    ) ||
+      hostname ===
+        "maps.google.com" ||
 
-    hostname ===
-      "goo.gl";
+      hostname ===
+        "goo.gl" ||
 
+      hostname ===
+        "maps.app.goo.gl"
+
+    ) && (
+
+      url.pathname.includes(
+        "/maps"
+      ) ||
+
+      hostname ===
+        "maps.app.goo.gl" ||
+
+      hostname ===
+        "goo.gl"
+
+    );
 
   }
 
@@ -1057,10 +1163,6 @@ function getCurrentLocation() {
     );
 
 
-  /*
-    Browser doesn't support GPS.
-  */
-
   if (
     !navigator.geolocation
   ) {
@@ -1074,9 +1176,7 @@ function getCurrentLocation() {
   }
 
 
-  /*
-    Loading state.
-  */
+  /* Loading */
 
   button.disabled =
     true;
@@ -1094,17 +1194,17 @@ function getCurrentLocation() {
 
 
   /*
-    Request location.
+    Request GPS location.
   */
 
   navigator.geolocation.getCurrentPosition(
 
     function (position) {
 
-      const lat =
+      const latitude =
         position.coords.latitude;
 
-      const lng =
+      const longitude =
         position.coords.longitude;
 
 
@@ -1117,27 +1217,27 @@ function getCurrentLocation() {
       */
 
       const mapsURL =
-        `https://www.google.com/maps?q=${lat},${lng}`;
+        `https://www.google.com/maps?q=${latitude.toFixed(6)},${longitude.toFixed(6)}`;
 
 
       /*
-        Store technical coordinates.
+        Store coordinates.
       */
 
       document.getElementById(
         "latitude"
       ).value =
-        lat.toFixed(6);
+        latitude.toFixed(6);
 
 
       document.getElementById(
         "longitude"
       ).value =
-        lng.toFixed(6);
+        longitude.toFixed(6);
 
 
       /*
-        Automatically fill Maps link.
+        Store Google Maps link.
       */
 
       document.getElementById(
@@ -1147,7 +1247,7 @@ function getCurrentLocation() {
 
 
       /*
-        Success message.
+        Success.
       */
 
       status.className =
@@ -1155,7 +1255,7 @@ function getCurrentLocation() {
 
 
       status.textContent =
-        "✓ Location captured and Google Maps link added.";
+        "✓ Location captured successfully.";
 
 
       /*
@@ -1165,20 +1265,19 @@ function getCurrentLocation() {
       button.disabled =
         false;
 
-
       button.textContent =
         "✓ Location Captured";
 
 
       /*
-        Show View on Maps button.
+        Enable map button.
       */
 
       updateMapPreview();
 
 
       /*
-        Restore button text after a moment.
+        Restore normal button text.
       */
 
       setTimeout(
@@ -1222,7 +1321,7 @@ function getCurrentLocation() {
       ) {
 
         message =
-          "Your location is unavailable. Please check GPS and try again.";
+          "Your location is unavailable. Please check your GPS and try again.";
 
       }
 
@@ -1274,6 +1373,11 @@ function showLocationError(
     );
 
 
+  if (!status) {
+    return;
+  }
+
+
   status.className =
     "location-status error";
 
@@ -1295,11 +1399,15 @@ function updateMapPreview() {
       "googleMapsLink"
     );
 
-
   const viewButton =
     document.getElementById(
       "viewLocation"
     );
+
+
+  if (!link || !viewButton) {
+    return;
+  }
 
 
   const value =
@@ -1341,16 +1449,15 @@ function handlePhotos(event) {
     [
       ...event.target.files
     ].filter(
-      file =>
-        file.type.startsWith(
+      function (file) {
+
+        return file.type.startsWith(
           "image/"
-        )
+        );
+
+      }
     );
 
-
-  /*
-    Maximum 4 photos.
-  */
 
   const available =
     4 - photos.length;
@@ -1381,8 +1488,8 @@ function handlePhotos(event) {
 
 
   /*
-    Allow selecting the
-    same file again later.
+    Reset input so same file can
+    be selected again.
   */
 
   event.target.value =
@@ -1403,12 +1510,20 @@ function renderPhotos() {
     );
 
 
+  if (!preview) {
+    return;
+  }
+
+
   preview.innerHTML =
     "";
 
 
   photos.forEach(
-    function (file, index) {
+    function (
+      file,
+      index
+    ) {
 
       const item =
         document.createElement(
@@ -1498,6 +1613,17 @@ function renderPhotos() {
 
 function buildReview() {
 
+  const reviewCard =
+    document.getElementById(
+      "reviewCard"
+    );
+
+
+  if (!reviewCard) {
+    return;
+  }
+
+
   const selectedServices =
     [
       ...document.querySelectorAll(
@@ -1505,8 +1631,11 @@ function buildReview() {
       )
     ]
     .map(
-      item =>
-        item.value
+      function (item) {
+
+        return item.value;
+
+      }
     )
     .join(", ");
 
@@ -1559,10 +1688,6 @@ function buildReview() {
     ).value.trim();
 
 
-  /*
-    Format date for customer.
-  */
-
   let formattedDate =
     date;
 
@@ -1587,6 +1712,7 @@ function buildReview() {
 
           year:
             "numeric"
+
         }
       );
 
@@ -1640,16 +1766,12 @@ function buildReview() {
   ];
 
 
-  const reviewCard =
-    document.getElementById(
-      "reviewCard"
-    );
-
-
   reviewCard.innerHTML =
     rows
       .map(
-        function ([label, value]) {
+        function (
+          [label, value]
+        ) {
 
           return `
 
@@ -1716,28 +1838,25 @@ function escapeHTML(value) {
 
 
 /* =========================================================
-   REQUEST ID
-========================================================= */
-
-function generateRequestId() {
-
-  const number =
-    Math.floor(
-      1 +
-      Math.random() * 999
-    );
-
-  return `REV-REQ-${String(number).padStart(3, "0")}`;
-
-}
-
-/* =========================================================
    COLLECT FORM DATA
 ========================================================= */
 
-function collectFormData(
-  requestId
-) {
+/*
+  IMPORTANT:
+
+  There is NO Request ID generated here.
+
+  Apps Script will generate:
+
+  REV-REQ-0001
+  REV-REQ-0002
+  REV-REQ-0003
+
+  This prevents the browser from becoming
+  the source of truth for Request IDs.
+*/
+
+function collectFormData() {
 
   const services =
     [
@@ -1746,19 +1865,15 @@ function collectFormData(
       )
     ]
     .map(
-      item =>
-        item.value
+      function (item) {
+
+        return item.value;
+
+      }
     );
 
 
   return {
-
-    timestamp:
-      new Date().toISOString(),
-
-    requestId:
-
-      requestId,
 
     customerName:
 
@@ -1769,6 +1884,7 @@ function collectFormData(
         .value
         .trim(),
 
+
     mobileNumber:
 
       document
@@ -1777,6 +1893,7 @@ function collectFormData(
         )
         .value
         .trim(),
+
 
     whatsappNumber:
 
@@ -1787,6 +1904,7 @@ function collectFormData(
         .value
         .trim(),
 
+
     email:
 
       document
@@ -1795,6 +1913,7 @@ function collectFormData(
         )
         .value
         .trim(),
+
 
     registrationNumber:
 
@@ -1806,6 +1925,7 @@ function collectFormData(
         .trim()
         .toUpperCase(),
 
+
     bikeBrand:
 
       document
@@ -1814,6 +1934,7 @@ function collectFormData(
         )
         .value
         .trim(),
+
 
     bikeModel:
 
@@ -1824,27 +1945,10 @@ function collectFormData(
         .value
         .trim(),
 
-    manufacturingYear:
-
-      document
-        .getElementById(
-          "manufacturingYear"
-        )
-        .value
-        .trim(),
-
-    odometer:
-
-      document
-        .getElementById(
-          "odometer"
-        )
-        .value
-        .trim(),
 
     services:
-
       services,
+
 
     issueDescription:
 
@@ -1855,6 +1959,7 @@ function collectFormData(
         .value
         .trim(),
 
+
     pickupAddress:
 
       document
@@ -1863,6 +1968,7 @@ function collectFormData(
         )
         .value
         .trim(),
+
 
     googleMapsLink:
 
@@ -1873,6 +1979,7 @@ function collectFormData(
         .value
         .trim(),
 
+
     latitude:
 
       document
@@ -1881,6 +1988,7 @@ function collectFormData(
         )
         .value
         .trim(),
+
 
     longitude:
 
@@ -1891,6 +1999,7 @@ function collectFormData(
         .value
         .trim(),
 
+
     pickupDate:
 
       document
@@ -1898,6 +2007,7 @@ function collectFormData(
           "pickupDate"
         )
         .value,
+
 
     pickupTime:
 
@@ -1907,22 +2017,14 @@ function collectFormData(
         )
         .value,
 
+
     consent:
 
       document
         .getElementById(
           "consent"
         )
-        .checked,
-
-    status:
-      "New",
-
-    assignedGarage:
-      "",
-
-    createdBy:
-      "Customer Website"
+        .checked
 
   };
 
@@ -1934,14 +2036,15 @@ function collectFormData(
 ========================================================= */
 
 /*
-  This function is intentionally separated from
-  the rest of the application.
+  This function sends the booking data
+  to your Google Apps Script Web App.
 
-  Later, replace:
+  Apps Script will:
 
-  YOUR_GOOGLE_APPS_SCRIPT_URL
-
-  with your Google Apps Script Web App URL.
+  1. Generate Request ID
+  2. Save the booking
+  3. Send admin email
+  4. Return the Request ID
 */
 
 async function submitToGoogleSheets(
@@ -1949,14 +2052,9 @@ async function submitToGoogleSheets(
 ) {
 
 
-  /*
-    DEVELOPMENT MODE
-
-    If the URL has not been added yet,
-    don't send anything to the internet.
-
-    The form can still be tested locally.
-  */
+  /* -------------------------------------------------------
+     CHECK CONFIGURATION
+  ------------------------------------------------------- */
 
   if (
     !GOOGLE_SCRIPT_URL ||
@@ -1964,41 +2062,23 @@ async function submitToGoogleSheets(
       "YOUR_GOOGLE_APPS_SCRIPT_URL"
   ) {
 
-    console.log(
-      "REVIGOO development submission:",
-      formData
-    );
-
-
     /*
-      Simulate a short request.
+      We intentionally stop here.
+
+      This prevents test submissions from
+      pretending that they were saved.
     */
 
-    await new Promise(
-      resolve =>
-        setTimeout(
-          resolve,
-          700
-        )
+    throw new Error(
+      "Google Apps Script URL is not configured."
     );
-
-
-    return {
-
-      success:
-        true,
-
-      developmentMode:
-        true
-
-    };
 
   }
 
 
-  /*
-    SEND TO GOOGLE APPS SCRIPT
-  */
+  /* -------------------------------------------------------
+     SEND REQUEST
+  ------------------------------------------------------- */
 
   const response =
     await fetch(
@@ -2007,6 +2087,11 @@ async function submitToGoogleSheets(
 
         method:
           "POST",
+
+        /*
+          text/plain avoids some browser
+          preflight/CORS issues with Apps Script.
+        */
 
         headers:
           {
@@ -2023,45 +2108,82 @@ async function submitToGoogleSheets(
     );
 
 
-  /*
-    Network/API failure.
-  */
+  /* -------------------------------------------------------
+     HTTP ERROR
+  ------------------------------------------------------- */
 
   if (
     !response.ok
   ) {
 
     throw new Error(
-      "Submission failed"
+      "Unable to submit booking."
     );
 
   }
 
 
-  /*
-    Try reading response.
-  */
+  /* -------------------------------------------------------
+     READ RESPONSE
+  ------------------------------------------------------- */
+
+  let result;
+
 
   try {
 
-    return await response.json();
+    result =
+      await response.json();
 
   }
 
   catch {
 
-    return {
-      success:
-        true
-    };
+    throw new Error(
+      "Invalid server response."
+    );
 
   }
+
+
+  /* -------------------------------------------------------
+     SERVER ERROR
+  ------------------------------------------------------- */
+
+  if (
+    !result ||
+    result.success !== true
+  ) {
+
+    throw new Error(
+      "Booking could not be completed."
+    );
+
+  }
+
+
+  /* -------------------------------------------------------
+     REQUEST ID IS GENERATED BY APPS SCRIPT
+  ------------------------------------------------------- */
+
+  if (
+    !result.requestId
+  ) {
+
+    throw new Error(
+      "Request ID was not returned."
+    );
+
+  }
+
+
+  return result;
 
 }
 
 
 /* =========================================================
-   FINAL SUBMISSION
+   FINAL FORM SUBMISSION
 ========================================================= */
 
 async function submitForm(
@@ -2071,9 +2193,9 @@ async function submitForm(
   event.preventDefault();
 
 
-  /*
-    Prevent duplicate submission.
-  */
+  /* -------------------------------------------------------
+     DUPLICATE SUBMISSION PROTECTION
+  ------------------------------------------------------- */
 
   if (
     submitting
@@ -2084,9 +2206,9 @@ async function submitForm(
   }
 
 
-  /*
-    Validate confirmation.
-  */
+  /* -------------------------------------------------------
+     VALIDATE FINAL STEP
+  ------------------------------------------------------- */
 
   if (
     !validateStep(5)
@@ -2097,77 +2219,135 @@ async function submitForm(
   }
 
 
+  /* -------------------------------------------------------
+     VALIDATE ALL STEPS AGAIN
+  ------------------------------------------------------- */
+
+  for (
+    let step = 1;
+    step <= 4;
+    step++
+  ) {
+
+    if (
+      !validateStep(step)
+    ) {
+
+      showStep(step);
+
+      return;
+
+    }
+
+  }
+
+
+  /* -------------------------------------------------------
+     START SUBMISSION
+  ------------------------------------------------------- */
+
   submitting =
     true;
 
 
-  /*
-    Loading state.
-  */
-
-  submitButton.disabled =
-    true;
-
-
-  submitButton.classList.add(
-    "loading"
+  setSubmitLoading(
+    true
   );
 
 
   try {
 
-    /*
-      Generate temporary Request ID.
-    */
-
-    const requestId =
-      generateRequestId();
-
-
-    /*
-      Collect all form data.
-    */
+    /* -----------------------------------------------------
+       COLLECT DATA
+    ----------------------------------------------------- */
 
     const formData =
-      collectFormData(
-        requestId
+      collectFormData();
+
+
+    /* -----------------------------------------------------
+       SEND TO APPS SCRIPT
+    ----------------------------------------------------- */
+
+    const result =
+      await submitToGoogleSheets(
+        formData
       );
 
 
     /*
-      Send data.
+      Apps Script returns:
+
+      {
+        success: true,
+        requestId: "REV-REQ-0001"
+      }
     */
 
-    await submitToGoogleSheets(
-      formData
-    );
+
+    const finalRequestId =
+      result.requestId;
 
 
-    /*
-      Show success screen.
-    */
+    /* -----------------------------------------------------
+       DISPLAY REAL REQUEST ID
+    ----------------------------------------------------- */
 
-    document.getElementById(
-      "requestIdDisplay"
-    ).textContent =
-      requestId;
-
-
-    document.getElementById(
-       "bookingPage"
-    ).classList.add(
-      "hidden"
-    );
+    const requestIdDisplay =
+      document.getElementById(
+        "requestIdDisplay"
+      );
 
 
-    successScreen.classList.remove(
-      "hidden"
-    );
+    if (
+      requestIdDisplay
+    ) {
+
+      requestIdDisplay.textContent =
+        finalRequestId;
+
+    }
 
 
-    /*
-      Go to top.
-    */
+    /* -----------------------------------------------------
+       HIDE BOOKING PAGE
+    ----------------------------------------------------- */
+
+    const bookingPage =
+      document.getElementById(
+        "bookingPage"
+      );
+
+
+    if (
+      bookingPage
+    ) {
+
+      bookingPage.classList.add(
+        "hidden"
+      );
+
+    }
+
+
+    /* -----------------------------------------------------
+       SHOW SUCCESS SCREEN
+    ----------------------------------------------------- */
+
+    if (
+      successScreen
+    ) {
+
+      successScreen.classList.remove(
+        "hidden"
+      );
+
+    }
+
+
+    /* -----------------------------------------------------
+       SCROLL TOP
+    ----------------------------------------------------- */
 
     window.scrollTo({
 
@@ -2179,13 +2359,16 @@ async function submitForm(
 
     });
 
+
   }
 
   catch (error) {
 
     /*
-      Technical error is NOT
-      shown to the customer.
+      Technical error is only logged
+      for development.
+
+      Customer sees a simple message.
     */
 
     console.error(
@@ -2206,12 +2389,8 @@ async function submitForm(
       false;
 
 
-    submitButton.disabled =
-      false;
-
-
-    submitButton.classList.remove(
-      "loading"
+    setSubmitLoading(
+      false
     );
 
   }
@@ -2220,17 +2399,53 @@ async function submitForm(
 
 
 /* =========================================================
-   CUSTOMER-FRIENDLY MESSAGE
+   SUBMIT BUTTON LOADING
+========================================================= */
+
+function setSubmitLoading(
+  loading
+) {
+
+  if (!submitButton) {
+    return;
+  }
+
+
+  submitButton.disabled =
+    loading;
+
+
+  submitButton.classList.toggle(
+    "loading",
+    loading
+  );
+
+
+  const text =
+    submitButton.querySelector(
+      ".submit-text"
+    );
+
+
+  if (text) {
+
+    text.textContent =
+      loading
+        ? "Submitting..."
+        : "Request Bike Service";
+
+  }
+
+}
+
+
+/* =========================================================
+   CUSTOMER MESSAGE
 ========================================================= */
 
 function showCustomerMessage(
   message
 ) {
-
-  /*
-    Reuse existing message box
-    if one already exists.
-  */
 
   let box =
     document.querySelector(
@@ -2276,13 +2491,13 @@ function showCustomerMessage(
           "500px",
 
         padding:
-          "13px 16px",
+          "14px 16px",
 
         borderRadius:
           "12px",
 
         background:
-          "#20242a",
+          "#20242A",
 
         color:
           "#ffffff",
@@ -2291,10 +2506,10 @@ function showCustomerMessage(
           "center",
 
         fontSize:
-          "12px",
+          "13px",
 
         fontWeight:
-          "650",
+          "600",
 
         boxShadow:
           "0 12px 30px rgba(0,0,0,.2)"
@@ -2323,7 +2538,14 @@ function showCustomerMessage(
     setTimeout(
       function () {
 
-        box.remove();
+        if (
+          box &&
+          box.parentNode
+        ) {
+
+          box.remove();
+
+        }
 
       },
       3500
@@ -2333,5 +2555,5 @@ function showCustomerMessage(
 
 
 /* =========================================================
-   END
+   END OF REVIGOO SCRIPT
 ========================================================= */
