@@ -9,19 +9,17 @@
 ========================================================= */
 
 /*
-  ============================================================
-  GOOGLE APPS SCRIPT CONFIGURATION
-  ============================================================
+   GOOGLE APPS SCRIPT CONFIGURATION
 
-  After deploying your Google Apps Script as a Web App,
-  paste the Web App URL between the quotation marks below.
+   After deploying your Google Apps Script as a Web App,
+   paste the Web App URL between the quotation marks below.
 
-  Example:
+   Example:
 
-  const GOOGLE_SCRIPT_URL =
-    "https://script.google.com/macros/s/XXXXXXXX/exec";
+   const GOOGLE_SCRIPT_URL =
+     "https://script.google.com/macros/s/XXXXXXXX/exec";
 
-  DO NOT add API keys or private credentials here.
+   DO NOT add API keys or private credentials here.
 */
 
 const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL";
@@ -31,9 +29,11 @@ const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL";
    DOM ELEMENTS
 ========================================================= */
 
-const form = document.getElementById("serviceForm");
+const form =
+  document.getElementById("serviceForm");
 
-const submitButton = document.getElementById("submitButton");
+const submitButton =
+  document.getElementById("submitButton");
 
 const registrationNumber =
   document.getElementById("registrationNumber");
@@ -62,6 +62,9 @@ const latitude =
 const longitude =
   document.getElementById("longitude");
 
+const googleMapsLink =
+  document.getElementById("googleMapsLink");
+
 const locationStatus =
   document.getElementById("locationStatus");
 
@@ -84,7 +87,9 @@ const progressFill =
   document.getElementById("progressFill");
 
 const progressSteps =
-  document.querySelectorAll(".progress-steps span");
+  document.querySelectorAll(
+    ".progress-steps span"
+  );
 
 const successScreen =
   document.getElementById("successScreen");
@@ -118,6 +123,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setupProgressTracking();
 
+  setupCurrentLocation();
+
 });
 
 
@@ -129,13 +136,21 @@ function setMinimumPickupDate() {
 
   const today = new Date();
 
-  const year = today.getFullYear();
+  const year =
+    today.getFullYear();
 
-  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const month =
+    String(
+      today.getMonth() + 1
+    ).padStart(2, "0");
 
-  const day = String(today.getDate()).padStart(2, "0");
+  const day =
+    String(
+      today.getDate()
+    ).padStart(2, "0");
 
-  pickupDate.min = `${year}-${month}-${day}`;
+  pickupDate.min =
+    `${year}-${month}-${day}`;
 }
 
 
@@ -145,12 +160,20 @@ function setMinimumPickupDate() {
 
 function setupRegistrationNumber() {
 
-  registrationNumber.addEventListener("input", () => {
+  if (!registrationNumber) {
+    return;
+  }
 
-    registrationNumber.value =
-      registrationNumber.value.toUpperCase();
+  registrationNumber.addEventListener(
+    "input",
+    () => {
 
-  });
+      registrationNumber.value =
+        registrationNumber.value
+          .toUpperCase();
+
+    }
+  );
 
 }
 
@@ -161,14 +184,26 @@ function setupRegistrationNumber() {
 
 function setupPhoneInputs() {
 
-  [mobileNumber, whatsappNumber].forEach(input => {
+  [
+    mobileNumber,
+    whatsappNumber
+  ].forEach(input => {
 
-    input.addEventListener("input", () => {
+    if (!input) {
+      return;
+    }
 
-      input.value =
-        input.value.replace(/\D/g, "").slice(0, 10);
+    input.addEventListener(
+      "input",
+      () => {
 
-    });
+        input.value =
+          input.value
+            .replace(/\D/g, "")
+            .slice(0, 10);
+
+      }
+    );
 
   });
 
@@ -181,56 +216,72 @@ function setupPhoneInputs() {
 
 function setupPhotoUpload() {
 
-  bikePhotos.addEventListener("change", event => {
+  if (!bikePhotos) {
+    return;
+  }
 
-    const files =
-      Array.from(event.target.files);
+  bikePhotos.addEventListener(
+    "change",
+    event => {
 
-    if (!files.length) {
-      return;
-    }
+      const files =
+        Array.from(
+          event.target.files
+        );
 
-
-    const availableSlots =
-      4 - selectedPhotos.length;
-
-    if (availableSlots <= 0) {
-
-      showTemporaryMessage(
-        "You can upload a maximum of 4 photos."
-      );
-
-      bikePhotos.value = "";
-
-      return;
-    }
-
-
-    const filesToAdd =
-      files.slice(0, availableSlots);
-
-
-    filesToAdd.forEach(file => {
-
-      if (!file.type.startsWith("image/")) {
+      if (!files.length) {
         return;
       }
 
-      selectedPhotos.push(file);
 
-    });
+      const availableSlots =
+        4 - selectedPhotos.length;
 
 
-    renderPhotoPreviews();
+      if (availableSlots <= 0) {
 
-    /*
-      Reset the file input so the customer can select
-      the same file again if needed.
-    */
+        showTemporaryMessage(
+          "You can upload a maximum of 4 photos."
+        );
 
-    bikePhotos.value = "";
+        bikePhotos.value = "";
 
-  });
+        return;
+      }
+
+
+      const filesToAdd =
+        files.slice(
+          0,
+          availableSlots
+        );
+
+
+      filesToAdd.forEach(file => {
+
+        if (
+          !file.type.startsWith("image/")
+        ) {
+          return;
+        }
+
+        selectedPhotos.push(file);
+
+      });
+
+
+      renderPhotoPreviews();
+
+
+      /*
+        Reset the file input so the customer
+        can select the same file again.
+      */
+
+      bikePhotos.value = "";
+
+    }
+  );
 
 }
 
@@ -241,73 +292,91 @@ function setupPhotoUpload() {
 
 function renderPhotoPreviews() {
 
+  if (!photoPreview) {
+    return;
+  }
+
   photoPreview.innerHTML = "";
 
-  selectedPhotos.forEach((file, index) => {
 
-    const wrapper =
-      document.createElement("div");
+  selectedPhotos.forEach(
+    (file, index) => {
 
-    wrapper.className = "photo-item";
+      const wrapper =
+        document.createElement("div");
 
-
-    const image =
-      document.createElement("img");
-
-    image.alt =
-      `Bike photo ${index + 1}`;
+      wrapper.className =
+        "photo-item";
 
 
-    const reader =
-      new FileReader();
+      const image =
+        document.createElement("img");
+
+      image.alt =
+        `Bike photo ${index + 1}`;
 
 
-    reader.onload = event => {
-
-      image.src =
-        event.target.result;
-
-    };
+      const reader =
+        new FileReader();
 
 
-    reader.readAsDataURL(file);
+      reader.onload =
+        event => {
+
+          image.src =
+            event.target.result;
+
+        };
 
 
-    const removeButton =
-      document.createElement("button");
-
-    removeButton.type = "button";
-
-    removeButton.className =
-      "remove-photo";
-
-    removeButton.setAttribute(
-      "aria-label",
-      `Remove photo ${index + 1}`
-    );
-
-    removeButton.textContent = "×";
+      reader.readAsDataURL(file);
 
 
-    removeButton.addEventListener(
-      "click",
-      () => {
+      const removeButton =
+        document.createElement("button");
 
-        selectedPhotos.splice(index, 1);
+      removeButton.type =
+        "button";
 
-        renderPhotoPreviews();
+      removeButton.className =
+        "remove-photo";
 
-      }
-    );
+      removeButton.setAttribute(
+        "aria-label",
+        `Remove photo ${index + 1}`
+      );
+
+      removeButton.textContent =
+        "×";
 
 
-    wrapper.appendChild(image);
+      removeButton.addEventListener(
+        "click",
+        () => {
 
-    wrapper.appendChild(removeButton);
+          selectedPhotos.splice(
+            index,
+            1
+          );
 
-    photoPreview.appendChild(wrapper);
+          renderPhotoPreviews();
 
-  });
+        }
+      );
+
+
+      wrapper.appendChild(image);
+
+      wrapper.appendChild(
+        removeButton
+      );
+
+      photoPreview.appendChild(
+        wrapper
+      );
+
+    }
+  );
 
 }
 
@@ -316,16 +385,46 @@ function renderPhotoPreviews() {
    CURRENT LOCATION
 ========================================================= */
 
-useCurrentLocationButton.addEventListener(
-  "click",
-  getCurrentLocation
-);
+/*
+   When the customer clicks:
 
+   "Use My Current Location"
+
+   the browser will:
+
+   1. Ask for location permission.
+   2. Get GPS latitude.
+   3. Get GPS longitude.
+   4. Fill latitude field.
+   5. Fill longitude field.
+   6. Automatically create Google Maps URL.
+   7. Put the URL into Google Maps Link field.
+*/
+
+function setupCurrentLocation() {
+
+  if (!useCurrentLocationButton) {
+    return;
+  }
+
+  useCurrentLocationButton.addEventListener(
+    "click",
+    getCurrentLocation
+  );
+
+}
+
+
+/* =========================================================
+   GET CURRENT LOCATION
+========================================================= */
 
 function getCurrentLocation() {
 
   clearLocationMessage();
 
+
+  /* Check browser support */
 
   if (!navigator.geolocation) {
 
@@ -337,15 +436,32 @@ function getCurrentLocation() {
   }
 
 
-  useCurrentLocationButton.disabled = true;
+  /* Loading state */
+
+  useCurrentLocationButton.disabled =
+    true;
 
   useCurrentLocationButton.innerHTML =
     "<span>◎</span> Finding location...";
 
 
+  locationStatus.textContent =
+    "Getting your current location. Please wait...";
+
+  locationStatus.classList.add(
+    "visible"
+  );
+
+
+  /* Request GPS location */
+
   navigator.geolocation.getCurrentPosition(
 
     position => {
+
+      /*
+        Get exact GPS coordinates
+      */
 
       const lat =
         position.coords.latitude;
@@ -354,22 +470,86 @@ function getCurrentLocation() {
         position.coords.longitude;
 
 
+      /*
+        Fill latitude
+      */
+
       latitude.value =
         lat.toFixed(6);
+
+
+      /*
+        Fill longitude
+      */
 
       longitude.value =
         lng.toFixed(6);
 
 
+      /*
+        IMPORTANT:
+
+        Automatically create Google Maps
+        link using the captured coordinates.
+
+        Example:
+
+        https://www.google.com/maps?q=10.015900,76.341900
+      */
+
+      const mapsURL =
+        `https://www.google.com/maps?q=${lat},${lng}`;
+
+
+      /*
+        Put the generated URL
+        into the Google Maps Link field.
+      */
+
+      if (googleMapsLink) {
+
+        googleMapsLink.value =
+          mapsURL;
+
+      }
+
+
+      /*
+        Show success message
+      */
+
       showLocationSuccess(
-        "Your current location has been added."
+        "✓ Current location captured and Google Maps link added."
       );
 
 
-      useCurrentLocationButton.disabled = false;
+      /*
+        Restore button
+      */
+
+      useCurrentLocationButton.disabled =
+        false;
 
       useCurrentLocationButton.innerHTML =
-        "<span>◎</span> Use My Current Location";
+        "<span>✓</span> Location Captured";
+
+
+      /*
+        Change button back after a few seconds.
+      */
+
+      setTimeout(() => {
+
+        if (
+          useCurrentLocationButton
+        ) {
+
+          useCurrentLocationButton.innerHTML =
+            "<span>◎</span> Use My Current Location";
+
+        }
+
+      }, 3000);
 
     },
 
@@ -377,20 +557,38 @@ function getCurrentLocation() {
     error => {
 
       let message =
-        "We couldn't get your location. Please enter the location manually.";
+        "We couldn't get your location. Please try again.";
 
+
+      /*
+        Permission denied
+      */
 
       if (error.code === 1) {
 
         message =
           "Location permission was denied. Please allow location access and try again.";
 
-      } else if (error.code === 2) {
+      }
+
+
+      /*
+        Position unavailable
+      */
+
+      else if (error.code === 2) {
 
         message =
-          "Your location is currently unavailable. Please try again.";
+          "Your location is currently unavailable. Please check your GPS and try again.";
 
-      } else if (error.code === 3) {
+      }
+
+
+      /*
+        Timeout
+      */
+
+      else if (error.code === 3) {
 
         message =
           "Location request timed out. Please try again.";
@@ -398,19 +596,33 @@ function getCurrentLocation() {
       }
 
 
-      showLocationError(message);
+      showLocationError(
+        message
+      );
 
 
-      useCurrentLocationButton.disabled = false;
+      /*
+        Restore button
+      */
+
+      useCurrentLocationButton.disabled =
+        false;
 
       useCurrentLocationButton.innerHTML =
         "<span>◎</span> Use My Current Location";
 
     },
 
+
+    /*
+      GPS options
+    */
+
     {
       enableHighAccuracy: true,
-      timeout: 10000,
+
+      timeout: 15000,
+
       maximumAge: 0
     }
 
@@ -425,29 +637,52 @@ function getCurrentLocation() {
 
 function showLocationSuccess(message) {
 
-  locationStatus.textContent = message;
+  if (!locationStatus) {
+    return;
+  }
 
-  locationStatus.classList.remove("error");
+  locationStatus.textContent =
+    message;
 
-  locationStatus.classList.add("visible");
+  locationStatus.classList.remove(
+    "error"
+  );
+
+  locationStatus.classList.add(
+    "visible"
+  );
 
 }
 
 
 function showLocationError(message) {
 
-  locationStatus.textContent = message;
+  if (!locationStatus) {
+    return;
+  }
 
-  locationStatus.classList.add("error");
+  locationStatus.textContent =
+    message;
 
-  locationStatus.classList.add("visible");
+  locationStatus.classList.add(
+    "error"
+  );
+
+  locationStatus.classList.add(
+    "visible"
+  );
 
 }
 
 
 function clearLocationMessage() {
 
-  locationStatus.textContent = "";
+  if (!locationStatus) {
+    return;
+  }
+
+  locationStatus.textContent =
+    "";
 
   locationStatus.classList.remove(
     "visible",
@@ -469,6 +704,11 @@ function setupProgressTracking() {
     );
 
 
+  if (!sections.length) {
+    return;
+  }
+
+
   const observer =
     new IntersectionObserver(
 
@@ -476,7 +716,10 @@ function setupProgressTracking() {
 
         const visibleSections =
           entries
-            .filter(entry => entry.isIntersecting)
+            .filter(
+              entry =>
+                entry.isIntersecting
+            )
             .sort(
               (a, b) =>
                 b.intersectionRatio -
@@ -498,7 +741,9 @@ function setupProgressTracking() {
           );
 
 
-        updateProgress(currentStep);
+        updateProgress(
+          currentStep
+        );
 
       },
 
@@ -509,11 +754,13 @@ function setupProgressTracking() {
     );
 
 
-  sections.forEach(section => {
+  sections.forEach(
+    section => {
 
-    observer.observe(section);
+      observer.observe(section);
 
-  });
+    }
+  );
 
 }
 
@@ -530,8 +777,12 @@ function updateProgress(step) {
     );
 
 
-  progressFill.style.width =
-    `${percentage}%`;
+  if (progressFill) {
+
+    progressFill.style.width =
+      `${percentage}%`;
+
+  }
 
 
   progressSteps.forEach(
@@ -552,14 +803,21 @@ function updateProgress(step) {
    VALIDATION HELPERS
 ========================================================= */
 
-function showFieldError(input, message) {
+function showFieldError(
+  input,
+  message
+) {
 
-  input.classList.add("invalid");
+  input.classList.add(
+    "invalid"
+  );
+
 
   const error =
-    input.parentElement.querySelector(
-      ".error-message"
-    );
+    input.parentElement
+      .querySelector(
+        ".error-message"
+      );
 
 
   if (error) {
@@ -584,14 +842,16 @@ function clearFieldError(input) {
 
 
   const error =
-    input.parentElement.querySelector(
-      ".error-message"
-    );
+    input.parentElement
+      .querySelector(
+        ".error-message"
+      );
 
 
   if (error) {
 
-    error.textContent = "";
+    error.textContent =
+      "";
 
     error.classList.remove(
       "visible"
@@ -713,44 +973,64 @@ function validateVehicleDetails() {
 
 
   const requiredFields = [
+
     {
       input: registrationNumber,
-      message: "Please enter your bike registration number."
+      message:
+        "Please enter your bike registration number."
     },
+
     {
-      input: document.getElementById("bikeBrand"),
-      message: "Please enter your bike brand."
+      input:
+        document.getElementById(
+          "bikeBrand"
+        ),
+
+      message:
+        "Please enter your bike brand."
     },
+
     {
-      input: document.getElementById("bikeModel"),
-      message: "Please enter your bike model."
+      input:
+        document.getElementById(
+          "bikeModel"
+        ),
+
+      message:
+        "Please enter your bike model."
     }
+
   ];
 
 
-  requiredFields.forEach(item => {
+  requiredFields.forEach(
+    item => {
 
-    if (!item.input.value.trim()) {
+      if (!item.input.value.trim()) {
 
-      showFieldError(
-        item.input,
-        item.message
-      );
+        showFieldError(
+          item.input,
+          item.message
+        );
 
-      valid = false;
+        valid = false;
 
-    } else {
+      } else {
 
-      clearFieldError(
-        item.input
-      );
+        clearFieldError(
+          item.input
+        );
+
+      }
 
     }
+  );
 
-  });
 
-
-  if (manufacturingYear.value) {
+  if (
+    manufacturingYear &&
+    manufacturingYear.value
+  ) {
 
     const year =
       Number(
@@ -813,11 +1093,13 @@ function validateServices() {
   }
 
 
-  serviceError.textContent = "";
+  serviceError.textContent =
+    "";
 
   serviceError.classList.remove(
     "visible"
   );
+
 
   return true;
 }
@@ -921,11 +1203,13 @@ function validateConsent() {
   }
 
 
-  consentError.textContent = "";
+  consentError.textContent =
+    "";
 
   consentError.classList.remove(
     "visible"
   );
+
 
   return true;
 }
@@ -940,18 +1224,14 @@ function validateForm() {
   const customerValid =
     validateCustomerDetails();
 
-
   const vehicleValid =
     validateVehicleDetails();
-
 
   const serviceValid =
     validateServices();
 
-
   const pickupValid =
     validatePickupDetails();
-
 
   const consentValid =
     validateConsent();
@@ -989,7 +1269,9 @@ function generateRequestId() {
    FORM DATA COLLECTION
 ========================================================= */
 
-function collectFormData(requestId) {
+function collectFormData(
+  requestId
+) {
 
   const selectedServices =
     Array.from(
@@ -997,7 +1279,8 @@ function collectFormData(requestId) {
         'input[name="services"]:checked'
       )
     ).map(
-      checkbox => checkbox.value
+      checkbox =>
+        checkbox.value
     );
 
 
@@ -1023,7 +1306,9 @@ function collectFormData(requestId) {
       email.value.trim(),
 
     registrationNumber:
-      registrationNumber.value.trim().toUpperCase(),
+      registrationNumber.value
+        .trim()
+        .toUpperCase(),
 
     bikeBrand:
       document.getElementById(
@@ -1057,9 +1342,9 @@ function collectFormData(requestId) {
       ).value.trim(),
 
     googleMapsLink:
-      document.getElementById(
-        "googleMapsLink"
-      ).value.trim(),
+      googleMapsLink
+        ? googleMapsLink.value.trim()
+        : "",
 
     latitude:
       latitude.value.trim(),
@@ -1099,25 +1384,17 @@ function collectFormData(requestId) {
 ========================================================= */
 
 /*
-  ============================================================
-  GOOGLE APPS SCRIPT SUBMISSION FUNCTION
-  ============================================================
+   GOOGLE APPS SCRIPT SUBMISSION FUNCTION
 
-  This function is intentionally separated from the rest
-  of the application.
+   Replace GOOGLE_SCRIPT_URL above after
+   deploying your Apps Script Web App.
 
-  Once you have your Apps Script Web App URL:
-
-  1. Replace GOOGLE_SCRIPT_URL above.
-  2. Keep the function below unchanged unless your Apps
-     Script requires a different payload.
-
-  The photos are NOT uploaded here.
-
-  A future image-upload API can be added separately.
+   Photos are NOT uploaded here.
 */
 
-async function submitToGoogleSheets(formData) {
+async function submitToGoogleSheets(
+  formData
+) {
 
   if (
     !GOOGLE_SCRIPT_URL ||
@@ -1126,13 +1403,10 @@ async function submitToGoogleSheets(formData) {
   ) {
 
     /*
-      Development mode:
+      Development mode.
 
-      The form will work without a backend.
-      Data is logged to the browser console.
-
-      This allows you to test the frontend before
-      connecting Google Sheets.
+      Data is only logged to the browser
+      while Google Apps Script is not connected.
     */
 
     console.log(
@@ -1141,19 +1415,14 @@ async function submitToGoogleSheets(formData) {
     );
 
 
-    /*
-      Simulate a successful submission.
-
-      Remove this development block after
-      connecting your Apps Script.
-    */
-
     await delay(700);
+
 
     return {
       success: true,
       developmentMode: true
     };
+
   }
 
 
@@ -1163,6 +1432,7 @@ async function submitToGoogleSheets(formData) {
       await fetch(
         GOOGLE_SCRIPT_URL,
         {
+
           method: "POST",
 
           headers: {
@@ -1171,7 +1441,10 @@ async function submitToGoogleSheets(formData) {
           },
 
           body:
-            JSON.stringify(formData)
+            JSON.stringify(
+              formData
+            )
+
         }
       );
 
@@ -1185,14 +1458,8 @@ async function submitToGoogleSheets(formData) {
     }
 
 
-    /*
-      Apps Script may return JSON.
-
-      If parsing fails, we still treat a successful
-      HTTP response as successful.
-    */
-
     let result = null;
+
 
     try {
 
@@ -1209,6 +1476,7 @@ async function submitToGoogleSheets(formData) {
 
 
     return result;
+
 
   } catch (error) {
 
@@ -1253,7 +1521,7 @@ form.addEventListener(
 
 
     /*
-      Validate everything before submission.
+      Validate form.
     */
 
     const valid =
@@ -1275,8 +1543,10 @@ form.addEventListener(
           block: "center"
         });
 
+
         setTimeout(
-          () => firstInvalid.focus(),
+          () =>
+            firstInvalid.focus(),
           350
         );
 
@@ -1298,9 +1568,17 @@ form.addEventListener(
 
     try {
 
+      /*
+        Generate temporary request ID.
+      */
+
       const requestId =
         generateRequestId();
 
+
+      /*
+        Collect all form data.
+      */
 
       const formData =
         collectFormData(
@@ -1309,7 +1587,7 @@ form.addEventListener(
 
 
       /*
-        Submit to Google Apps Script.
+        Send to Google Sheets.
       */
 
       await submitToGoogleSheets(
@@ -1318,7 +1596,7 @@ form.addEventListener(
 
 
       /*
-        Show success screen.
+        Show success.
       */
 
       showSuccessScreen(
@@ -1329,7 +1607,7 @@ form.addEventListener(
     } catch (error) {
 
       /*
-        Never expose technical details
+        Never show technical errors
         to the customer.
       */
 
@@ -1354,7 +1632,9 @@ form.addEventListener(
    LOADING STATE
 ========================================================= */
 
-function setSubmitLoading(loading) {
+function setSubmitLoading(
+  loading
+) {
 
   submitButton.disabled =
     loading;
@@ -1371,7 +1651,9 @@ function setSubmitLoading(loading) {
    SUCCESS SCREEN
 ========================================================= */
 
-function showSuccessScreen(requestId) {
+function showSuccessScreen(
+  requestId
+) {
 
   requestIdDisplay.textContent =
     requestId;
@@ -1404,13 +1686,9 @@ function showSuccessScreen(requestId) {
    TEMPORARY MESSAGE
 ========================================================= */
 
-function showTemporaryMessage(message) {
-
-  /*
-    Lightweight customer-facing message.
-
-    No technical error is shown.
-  */
+function showTemporaryMessage(
+  message
+) {
 
   const existing =
     document.querySelector(
@@ -1440,22 +1718,41 @@ function showTemporaryMessage(message) {
   Object.assign(
     messageElement.style,
     {
+
       position: "fixed",
+
       left: "50%",
+
       bottom: "25px",
-      transform: "translateX(-50%)",
+
+      transform:
+        "translateX(-50%)",
+
       zIndex: "9999",
-      width: "calc(100% - 30px)",
+
+      width:
+        "calc(100% - 30px)",
+
       maxWidth: "500px",
-      padding: "13px 16px",
+
+      padding:
+        "13px 16px",
+
       borderRadius: "12px",
+
       background: "#252525",
+
       color: "#fff",
+
       fontSize: "12px",
+
       fontWeight: "600",
+
       textAlign: "center",
+
       boxShadow:
         "0 10px 30px rgba(0,0,0,.2)"
+
     }
   );
 
@@ -1465,11 +1762,14 @@ function showTemporaryMessage(message) {
   );
 
 
-  setTimeout(() => {
+  setTimeout(
+    () => {
 
-    messageElement.remove();
+      messageElement.remove();
 
-  }, 3500);
+    },
+    3500
+  );
 
 }
 
@@ -1478,7 +1778,9 @@ function showTemporaryMessage(message) {
    UTILITY
 ========================================================= */
 
-function delay(milliseconds) {
+function delay(
+  milliseconds
+) {
 
   return new Promise(
     resolve =>
