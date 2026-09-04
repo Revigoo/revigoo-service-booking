@@ -2258,30 +2258,6 @@ async function submitForm(
     */
 
 
-    const finalRequestId =
-      result.requestId;
-
-
-    /* -----------------------------------------------------
-       DISPLAY REAL REQUEST ID
-    ----------------------------------------------------- */
-
-    const requestIdDisplay =
-      document.getElementById(
-        "requestIdDisplay"
-      );
-
-
-    if (
-      requestIdDisplay
-    ) {
-
-      requestIdDisplay.textContent =
-        finalRequestId;
-
-    }
-
-
     /* -----------------------------------------------------
        HIDE BOOKING PAGE
     ----------------------------------------------------- */
